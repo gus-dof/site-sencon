@@ -1,0 +1,72 @@
+---
+const testimonials = [
+  {
+    quote: 'Estou muito satisfeito com o atendimento. Desde o primeiro dia que contratei, o atendimento tem sido muito bom.',
+    name: 'José L. Vicente',
+    role: 'Investidor B3 · cliente há 4 anos',
+  },
+  {
+    quote: 'Elogiar como a calculadora simplifica nossos negócios, e o atendimento é muito bom.',
+    name: 'Alanderson B. Borges',
+    role: 'Investidor · Bolsa de Valores',
+  },
+  {
+    quote: 'A ferramenta de importação de notas de corretagem me auxiliou muito na declaração do imposto de renda.',
+    name: 'Lucas Bertho',
+    role: 'Investidor · Renda Variável',
+  },
+  {
+    quote: 'Transparência e facilidade de uso da plataforma — quando se tem um problema, é rapidamente resolvido.',
+    name: 'David W. Israel',
+    role: 'Investidor B3 + Exterior',
+  },
+]
+
+function initials(name: string) {
+  return name.split(' ').filter(Boolean).slice(0, 2).map(s => s[0]).join('')
+}
+---
+
+<section class="section section--gray">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">Depoimentos</span>
+      <h2>Confiança construída em 14+ anos.</h2>
+      <p>O que dizem nossos 300 mil clientes — investidores de todos os perfis.</p>
+    </div>
+
+    <!-- Rating summary -->
+    <div class="testi-summary">
+      <div class="rating">4,9</div>
+      <div class="meta">
+        <div class="stars">
+          {Array(5).fill(null).map(() => (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          ))}
+        </div>
+        <div class="t">Excelente</div>
+        <div class="d">avaliação média · &gt; 2 mil avaliações</div>
+      </div>
+    </div>
+
+    <div class="testi">
+      {testimonials.map(item => (
+        <article class="testi__card">
+          <div class="testi__stars">
+            {Array(5).fill(null).map(() => (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            ))}
+          </div>
+          <p class="testi__quote">{item.quote}</p>
+          <div class="testi__author">
+            <div class="testi__avatar">{initials(item.name)}</div>
+            <div>
+              <div class="name">{item.name}</div>
+              <div class="role">{item.role}</div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

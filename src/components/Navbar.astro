@@ -1,0 +1,92 @@
+---
+---
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="#" class="navbar__logo">
+      <img src="/assets/logomark-sencon.png" alt="Sencon" />
+      <span class="wm">Sencon</span>
+    </a>
+
+    <nav class="navbar__nav">
+      <a href="#" class="navbar__link">Home</a>
+      <a href="#" class="navbar__link">Assessores e Contadores</a>
+      <a href="#" class="navbar__link">Loja</a>
+
+      <div class="navbar__drop">
+        <a href="#" class="navbar__link">
+          Serviços
+          <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="navbar__drop-menu">
+          <a href="#" class="navbar__drop-item">
+            <span class="t">Para investidores</span>
+            <span class="d">Cálculo de IR para B3, Exterior e Cripto.</span>
+          </a>
+          <a href="#" class="navbar__drop-item">
+            <span class="t">Para assessores e contadores</span>
+            <span class="d">Gerencie o IR da sua carteira de clientes.</span>
+          </a>
+          <a href="#" class="navbar__drop-item">
+            <span class="t">Para contabilidade</span>
+            <span class="d">Relatórios e revisão contábil simplificada.</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="navbar__drop">
+        <a href="#" class="navbar__link">
+          Conteúdos
+          <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="navbar__drop-menu">
+          <a href="#" class="navbar__drop-item">
+            <span class="t">Blog</span>
+            <span class="d">Guias, novidades e análises sobre IR.</span>
+          </a>
+          <a href="#" class="navbar__drop-item">
+            <span class="t">Central de ajuda</span>
+            <span class="d">Tutoriais, FAQ e atendimento ao cliente.</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="navbar__cta">
+      <!-- Theme toggle -->
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+        <span class="theme-toggle__track">
+          <span class="theme-toggle__icon theme-toggle__icon--sun">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>
+          </span>
+          <span class="theme-toggle__icon theme-toggle__icon--moon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <span class="theme-toggle__thumb"></span>
+        </span>
+      </button>
+
+      <a href="#" class="navbar__login">Login</a>
+      <a href="#" class="btn btn--primary btn--sm">Cadastre-se</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const navbar = document.getElementById('navbar')!
+  const toggle = document.getElementById('theme-toggle')!
+
+  // Scroll detection
+  const onScroll = () => {
+    navbar.classList.toggle('navbar--scrolled', window.scrollY > 8)
+  }
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+
+  // Theme toggle
+  toggle.addEventListener('click', () => {
+    const current = document.body.getAttribute('data-theme') || 'dark'
+    const next = current === 'dark' ? 'light' : 'dark'
+    document.body.setAttribute('data-theme', next)
+    try { localStorage.setItem('sencon-theme', next) } catch (_) {}
+  })
+</script>

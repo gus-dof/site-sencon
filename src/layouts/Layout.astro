@@ -1,0 +1,39 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'Sencon · Calculadora automática de IR sobre Renda Variável',
+  description = 'A primeira calculadora automática de Imposto de Renda sobre Renda Variável do Brasil. +14 anos cuidando do IR de 300 mil investidores. Cálculo, DARF e Declaração — em poucos cliques.',
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/assets/logomark-sencon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Prevent flash: apply saved theme before first paint -->
+    <script is:inline>
+      (function () {
+        try {
+          const saved = localStorage.getItem('sencon-theme') || 'dark'
+          document.body.setAttribute('data-theme', saved)
+        } catch (_) {
+          document.body.setAttribute('data-theme', 'dark')
+        }
+      })()
+    </script>
+    <slot />
+  </body>
+</html>
