@@ -4,5 +4,11 @@
   <span class="lion-emoji">🦁</span>
   <b>Prazo da Declaração de IR</b> — Envie sua declaração até <b>29/05</b> e evite multas.
   &nbsp;·&nbsp;
-  <a href="#" style="text-decoration: underline; text-underline-offset: 3px;">Saiba mais</a>
+  <a href="#" style="text-decoration: underline; text-underline-offset: 3px;" id="topbanner-cta-btn">Saiba mais</a>
 </div>
+
+<script is:inline>
+  document.getElementById('topbanner-cta-btn')?.addEventListener('click', function () {
+    window.posthog?.capture('topbanner_cta_clicked');
+  });
+</script>

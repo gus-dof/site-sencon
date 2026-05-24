@@ -9,8 +9,8 @@
         <p>Importe suas notas, feche o mês e emita seu DARF — em poucos cliques. Em dia com a Receita Federal, sem planilhas.</p>
       </div>
       <div class="finalcta__actions">
-        <a href="#" class="btn btn--primary btn--lg">Cadastre-se grátis</a>
-        <a href="#" class="btn btn--ghost-dark btn--lg">Ver planos e preços</a>
+        <a href="#" class="btn btn--primary btn--lg" id="finalcta-signup-btn">Cadastre-se grátis</a>
+        <a href="#" class="btn btn--ghost-dark btn--lg" id="finalcta-plans-btn">Ver planos e preços</a>
         <div style="text-align: center; font-size: 13px; color: var(--ink-fg-subtle); margin-top: 6px;">
           Sem cartão de crédito · cancele quando quiser
         </div>
@@ -18,3 +18,12 @@
     </div>
   </div>
 </section>
+
+<script is:inline>
+  document.getElementById('finalcta-signup-btn')?.addEventListener('click', function () {
+    window.posthog?.capture('signup_clicked', { location: 'final_cta' });
+  });
+  document.getElementById('finalcta-plans-btn')?.addEventListener('click', function () {
+    window.posthog?.capture('hero_cta_plans_clicked', { location: 'final_cta' });
+  });
+</script>

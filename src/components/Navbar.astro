@@ -65,11 +65,20 @@
         </span>
       </button>
 
-      <a href="#" class="navbar__login">Login</a>
-      <a href="#" class="btn btn--primary btn--sm">Cadastre-se</a>
+      <a href="#" class="navbar__login" id="navbar-login-btn">Login</a>
+      <a href="#" class="btn btn--primary btn--sm" id="navbar-signup-btn">Cadastre-se</a>
     </div>
   </div>
 </header>
+
+<script is:inline>
+  document.getElementById('navbar-login-btn')?.addEventListener('click', function () {
+    window.posthog?.capture('navbar_login_clicked');
+  });
+  document.getElementById('navbar-signup-btn')?.addEventListener('click', function () {
+    window.posthog?.capture('navbar_signup_clicked');
+  });
+</script>
 
 <script>
   const navbar = document.getElementById('navbar')!

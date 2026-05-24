@@ -34,11 +34,11 @@
     </p>
 
     <div class="hero__centered-cta">
-      <a href="#produtos" class="btn btn--primary btn--lg">
+      <a href="#produtos" class="btn btn--primary btn--lg" id="hero-cta-products">
         Conheça nossos produtos
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
-      <a href="#planos" class="btn btn--ghost-dark btn--lg">Ver planos</a>
+      <a href="#planos" class="btn btn--ghost-dark btn--lg" id="hero-cta-plans">Ver planos</a>
     </div>
 
     <div class="hero__centered-trust">
@@ -63,6 +63,15 @@
       />
     </div>
   </div>
+
+<script is:inline>
+  document.getElementById('hero-cta-products')?.addEventListener('click', function () {
+    window.posthog?.capture('hero_cta_products_clicked');
+  });
+  document.getElementById('hero-cta-plans')?.addEventListener('click', function () {
+    window.posthog?.capture('hero_cta_plans_clicked');
+  });
+</script>
 
   <!-- Corretoras strip -->
   <div class="container">

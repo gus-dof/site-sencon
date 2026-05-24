@@ -41,7 +41,7 @@
             Relatório de auxílio à declaração anual
           </li>
         </ul>
-        <a href="#" class="product-cta">
+        <a href="#" class="product-cta" id="product-b3-btn">
           Conhecer o produto
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
@@ -79,7 +79,7 @@
             Relatórios exclusivos de acompanhamento
           </li>
         </ul>
-        <a href="#" class="product-cta">
+        <a href="#" class="product-cta" id="product-exterior-btn">
           Conhecer o produto
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
@@ -87,3 +87,12 @@
     </div>
   </div>
 </section>
+
+<script is:inline>
+  document.getElementById('product-b3-btn')?.addEventListener('click', function () {
+    window.posthog?.capture('product_learn_more_clicked', { product_name: 'IR para a Bolsa de Valores' });
+  });
+  document.getElementById('product-exterior-btn')?.addEventListener('click', function () {
+    window.posthog?.capture('product_learn_more_clicked', { product_name: 'IR para Exterior' });
+  });
+</script>
