@@ -1,44 +1,100 @@
 ---
 ---
-<section class="section section--gray">
+<section class="section section--gray flowsec">
   <div class="container">
     <div class="sec-head">
       <span class="eyebrow">Como funciona</span>
       <h2>Seu Imposto de Renda em 5 minutos.</h2>
-      <p>Com apenas 3 passos, você garante a emissão do seu DARF.</p>
+      <p>Do extrato da corretora ao DARF pronto — você faz só 3 passos, a Sencon cuida do resto.</p>
     </div>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step__num">01</div>
-        <h4>Importe suas notas</h4>
-        <p>Envie suas notas no formato SINACOR (.txt) ou conecte sua corretora diretamente à plataforma.</p>
-        <div class="step__mini">
-          nota_xp_2026_05.txt<br />
-          nota_btg_2026_05.txt<br />
-          <span style="color: var(--success-700);">✓ 28 notas importadas</span>
+    <div class="flow">
+      <div class="flow__diagram" role="img" aria-label="Fluxo: Corretoras, Importação, Conferência, Cálculo automático e DARF">
+        <div class="fnode fnode--origin">
+          <span class="fnode__tag fnode__tag--neutral">Origem</span>
+          <div class="fnode__ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <div class="fnode__body">
+            <div class="fnode__t">Corretoras</div>
+            <div class="fnode__d">B3 + Exterior</div>
+          </div>
+        </div>
+
+        <div class="frail" aria-hidden="true"><span class="frail__pulse" style="animation-delay: 0s;"></span></div>
+
+        <div class="fnode">
+          <span class="fnode__tag">Passo 01</span>
+          <div class="fnode__ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <div class="fnode__body">
+            <div class="fnode__t">Importação</div>
+            <div class="fnode__d">Notas SINACOR / API</div>
+          </div>
+        </div>
+
+        <div class="frail" aria-hidden="true"><span class="frail__pulse" style="animation-delay: 0.5s;"></span></div>
+
+        <div class="fnode">
+          <span class="fnode__tag">Passo 02</span>
+          <div class="fnode__ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11.5 14.5 16 9.5"/></svg>
+          </div>
+          <div class="fnode__body">
+            <div class="fnode__t">Conferência</div>
+            <div class="fnode__d">Custódia × B3</div>
+          </div>
+        </div>
+
+        <div class="frail" aria-hidden="true"><span class="frail__pulse" style="animation-delay: 1s;"></span></div>
+
+        <div class="fnode fnode--auto">
+          <span class="fnode__tag fnode__tag--auto">Automático</span>
+          <div class="fnode__ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/></svg>
+          </div>
+          <div class="fnode__body">
+            <div class="fnode__t">Cálculo</div>
+            <div class="fnode__d">Mês a mês, sem planilha</div>
+          </div>
+        </div>
+
+        <div class="frail" aria-hidden="true"><span class="frail__pulse" style="animation-delay: 1.5s;"></span></div>
+
+        <div class="fnode fnode--result">
+          <span class="fnode__tag fnode__tag--green">Passo 03</span>
+          <div class="fnode__ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v17l-3-2-2 2-2-2-2 2-2-2-3 2z"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+          </div>
+          <div class="fnode__body">
+            <div class="fnode__t">DARF</div>
+            <div class="fnode__d">Pronto para pagar</div>
+          </div>
         </div>
       </div>
 
-      <div class="step">
-        <div class="step__num">02</div>
-        <h4>Faça a conferência</h4>
-        <p>Confira sua custódia contra a B3, ajuste o que precisar e feche os meses com a tranquilidade de que tudo bate.</p>
-        <div class="step__mini">
-          Ações em custódia &nbsp; <span style="float: right; color: var(--success-700);">✓ conferido</span><br />
-          FIIs em custódia &nbsp; <span style="float: right; color: var(--success-700);">✓ conferido</span><br />
-          ETFs em custódia &nbsp; <span style="float: right; color: var(--success-700);">✓ conferido</span>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step__num">01</div>
+          <div>
+            <div class="flow-step__t">Importe suas notas</div>
+            <div class="flow-step__d">Envie suas notas SINACOR (.txt) ou conecte a corretora direto à plataforma.</div>
+          </div>
         </div>
-      </div>
-
-      <div class="step">
-        <div class="step__num">03</div>
-        <h4>Emita seu DARF</h4>
-        <p>Clique em <b>"EMITIR DARF"</b> e gere o documento mensal — com juros e multa já calculados, se necessário.</p>
-        <div class="step__mini" style="background: #EFF4FF; border-color: rgba(21,94,239,0.3); color: var(--sencon-blue);">
-          DARF Maio / 2026<br />
-          <b style="font-size: 14px;">R$ 4.812,37</b><br />
-          Vence em 30/06/2026
+        <div class="flow-step">
+          <div class="flow-step__num">02</div>
+          <div>
+            <div class="flow-step__t">Faça a conferência</div>
+            <div class="flow-step__d">Confira a custódia contra a B3, ajuste o que precisar e feche o mês tranquilo.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step__num">03</div>
+          <div>
+            <div class="flow-step__t">Emita seu DARF</div>
+            <div class="flow-step__d">Clique em <b>"Emitir DARF"</b> — com juros e multa já calculados, se necessário.</div>
+          </div>
         </div>
       </div>
     </div>

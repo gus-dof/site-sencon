@@ -1,6 +1,6 @@
 ---
 ---
-<section class="section section--dark">
+<section class="section section--dark section--features">
   <div class="container">
     <div class="sec-head">
       <span class="eyebrow">Funcionalidades</span>
@@ -8,38 +8,91 @@
       <p>Do investidor casual ao trader ativo — tudo o que você precisa em um só lugar.</p>
     </div>
 
-    <div class="features">
-      <div class="feature">
-        <div class="feature__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <div class="cf-grid">
+      <!-- IR para Exterior -->
+      <div class="cf-grid__col">
+        <div class="cf-grid__illo">
+          <svg class="illo" viewBox="0 0 300 184" fill="none" aria-hidden="true">
+            <circle class="s-soft" cx="104" cy="108" r="58" stroke-width="1.5" />
+            <ellipse class="s-soft" cx="104" cy="108" rx="24" ry="58" stroke-width="1.5" />
+            <line class="s-soft" x1="46" y1="108" x2="162" y2="108" stroke-width="1.5" />
+            <path class="s-soft" d="M53 80 Q104 62 155 80" stroke-width="1.5" />
+            <path class="s-soft" d="M53 136 Q104 154 155 136" stroke-width="1.5" />
+            <rect class="f-chip s-line" x="40" y="18" width="56" height="30" rx="8" stroke-width="1.25" />
+            <text class="f-chipfg illo-t" x="68" y="38" text-anchor="middle" font-size="14" font-weight="700">US$</text>
+            <rect class="f-chip s-acc" x="208" y="48" width="56" height="30" rx="8" stroke-width="1.5" />
+            <text class="f-acc illo-t" x="236" y="68" text-anchor="middle" font-size="14" font-weight="700">R$</text>
+            <path class="s-acc" d="M96 33 C150 5 210 18 236 47" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.85" />
+            <circle class="illo-pulse f-acc" r="4" style="offset-path: path('M96 33 C150 5 210 18 236 47');" />
+            <circle class="f-acc" cx="236" cy="47" r="2.5" />
+          </svg>
         </div>
-        <h4>IR para Exterior</h4>
-        <p>Cálculo de IR para investimentos fora do Brasil, com câmbio PTAX e suporte às principais corretoras internacionais.</p>
+        <div class="cf-grid__text">
+          <h4>IR para Exterior</h4>
+          <p>Cálculo do imposto sobre investimentos fora do Brasil, com conversão de câmbio PTAX e suporte às principais corretoras internacionais.</p>
+        </div>
       </div>
 
-      <div class="feature">
-        <div class="feature__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+      <!-- Cálculo 100% automático -->
+      <div class="cf-grid__col">
+        <div class="cf-grid__illo">
+          <svg class="illo" viewBox="0 0 300 184" fill="none" aria-hidden="true">
+            <line class="s-soft" x1="26" y1="78" x2="74" y2="78" stroke-width="3" stroke-linecap="round" />
+            <line class="s-soft" x1="26" y1="92" x2="64" y2="92" stroke-width="3" stroke-linecap="round" />
+            <line class="s-soft" x1="26" y1="106" x2="74" y2="106" stroke-width="3" stroke-linecap="round" />
+            <path class="s-acc" d="M82 92 L116 92" stroke-width="1.5" stroke-dasharray="4 5" />
+            <circle class="illo-pulse f-acc" r="3.5" style="offset-path: path('M82 92 L116 92');" />
+            <rect class="f-chip s-line" x="120" y="58" width="68" height="68" rx="12" stroke-width="1.5" />
+            <rect class="s-acc" x="138" y="76" width="32" height="32" rx="6" stroke-width="1.5" />
+            <g><line class="s-line" x1="112" y1="68" x2="120" y2="68" stroke-width="1.5" /><line class="s-line" x1="188" y1="68" x2="196" y2="68" stroke-width="1.5" /></g>
+            <g><line class="s-line" x1="112" y1="92" x2="120" y2="92" stroke-width="1.5" /><line class="s-line" x1="188" y1="92" x2="196" y2="92" stroke-width="1.5" /></g>
+            <g><line class="s-line" x1="112" y1="116" x2="120" y2="116" stroke-width="1.5" /><line class="s-line" x1="188" y1="116" x2="196" y2="116" stroke-width="1.5" /></g>
+            <g><line class="s-line" x1="140" y1="50" x2="140" y2="58" stroke-width="1.5" /><line class="s-line" x1="140" y1="126" x2="140" y2="134" stroke-width="1.5" /></g>
+            <g><line class="s-line" x1="154" y1="50" x2="154" y2="58" stroke-width="1.5" /><line class="s-line" x1="154" y1="126" x2="154" y2="134" stroke-width="1.5" /></g>
+            <g><line class="s-line" x1="168" y1="50" x2="168" y2="58" stroke-width="1.5" /><line class="s-line" x1="168" y1="126" x2="168" y2="134" stroke-width="1.5" /></g>
+            <path class="s-grn" d="M192 92 L226 92" stroke-width="1.5" stroke-dasharray="4 5" />
+            <circle class="f-grntint s-grn" cx="248" cy="92" r="18" stroke-width="1.5" />
+            <path class="s-grn" d="M240 92 l5 6 9 -11" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </div>
-        <h4>Geração de DARFs em 3 passos</h4>
-        <p>Importou, conferiu, emitiu. O documento sai pronto — com juros e multa calculados automaticamente quando preciso.</p>
+        <div class="cf-grid__text">
+          <h4>Cálculo 100% automático</h4>
+          <p>Esqueça as planilhas. Aqui na Sencon o cálculo do imposto é totalmente automatizado, importado e apurado mês a mês.</p>
+        </div>
       </div>
 
-      <div class="feature">
-        <div class="feature__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <!-- Relatórios de resultados -->
+      <div class="cf-grid__col">
+        <div class="cf-grid__illo">
+          <svg class="illo" viewBox="0 0 300 184" fill="none" aria-hidden="true">
+            <rect class="f-chip s-soft" x="44" y="26" width="212" height="132" rx="12" stroke-width="1.5" />
+            <line class="s-line" x1="66" y1="120" x2="66" y2="100" stroke-width="8" stroke-linecap="round" />
+            <line class="s-line" x1="92" y1="120" x2="92" y2="86" stroke-width="8" stroke-linecap="round" />
+            <line class="s-line" x1="118" y1="120" x2="118" y2="94" stroke-width="8" stroke-linecap="round" />
+            <line class="s-acc" x1="144" y1="120" x2="144" y2="66" stroke-width="8" stroke-linecap="round" />
+            <path class="s-acc" d="M64 96 L90 82 L116 90 L144 58 L196 48" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.9" />
+            <circle class="illo-pulse f-acc" r="3.5" style="offset-path: path('M64 96 L90 82 L116 90 L144 58 L196 48');" />
+            <circle class="f-grn" cx="196" cy="48" r="4" />
+            <line class="s-soft" x1="178" y1="100" x2="236" y2="100" stroke-width="3" stroke-linecap="round" />
+            <line class="s-soft" x1="178" y1="114" x2="222" y2="114" stroke-width="3" stroke-linecap="round" />
+            <line class="s-soft" x1="178" y1="128" x2="232" y2="128" stroke-width="3" stroke-linecap="round" />
+          </svg>
         </div>
-        <h4>Cálculo 100% automático</h4>
-        <p>Esqueça das planilhas. Aqui na Sencon o cálculo do imposto é totalmente automatizado, mês a mês.</p>
+        <div class="cf-grid__text">
+          <h4>Relatórios de resultados</h4>
+          <p>Acompanhe lucro, prejuízo e DARFs emitidos em relatórios exclusivos e veja a evolução da sua carteira ao longo do tempo.</p>
+        </div>
       </div>
 
-      <div class="feature">
-        <div class="feature__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/></svg>
-        </div>
-        <h4>Relatórios para controle de resultados</h4>
-        <p>Acesse relatórios exclusivos de lucro, prejuízo e DARFs emitidos para acompanhar a evolução da sua carteira.</p>
-      </div>
+      <!-- corner + divider crosshair ticks -->
+      <span class="cf-x" style="left: 0%; top: 0%;" aria-hidden="true"></span>
+      <span class="cf-x" style="left: 100%; top: 0%;" aria-hidden="true"></span>
+      <span class="cf-x" style="left: 0%; top: 100%;" aria-hidden="true"></span>
+      <span class="cf-x" style="left: 100%; top: 100%;" aria-hidden="true"></span>
+      <span class="cf-x" style="left: 33.3333%; top: 0%;" aria-hidden="true"></span>
+      <span class="cf-x" style="left: 66.6667%; top: 0%;" aria-hidden="true"></span>
+      <span class="cf-x" style="left: 33.3333%; top: 100%;" aria-hidden="true"></span>
+      <span class="cf-x" style="left: 66.6667%; top: 100%;" aria-hidden="true"></span>
     </div>
   </div>
 </section>

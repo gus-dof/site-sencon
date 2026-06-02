@@ -34,6 +34,8 @@ const {
         } catch (_) {
           document.body.setAttribute('data-theme', 'dark')
         }
+        // Illustration animations on by default (flow pulses, câmbio arc, etc.)
+        document.body.setAttribute('data-illo-anim', 'on')
       })()
     </script>
     <slot />

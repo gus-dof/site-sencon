@@ -1,4 +1,17 @@
 ---
+const brokers = [
+  { name: 'XP', logo: 'xp', market: 'B3' },
+  { name: 'BTG Pactual', logo: 'btg', market: 'B3' },
+  { name: 'Inter', logo: 'inter', market: 'B3' },
+  { name: 'Rico', logo: 'rico', market: 'B3' },
+  { name: 'Clear', logo: 'clear', market: 'B3' },
+  { name: 'Genial', logo: 'genial', market: 'B3' },
+  { name: 'Morgan Stanley', logo: 'morganstanley', market: 'EXT' },
+  { name: 'Avenue', logo: 'avenue', market: 'EXT' },
+  { name: 'Nomad', logo: 'nomad', market: 'EXT' },
+  { name: 'Interactive Brokers', logo: 'ibkr', market: 'EXT' },
+  { name: 'Charles Schwab', logo: 'schwab', market: 'EXT' },
+]
 ---
 <section class="hero hero--centered">
   <!-- Background grain + grid -->
@@ -77,18 +90,17 @@
   <div class="container">
     <div class="corretoras corretoras--on-brand">
       <div class="corretoras__label">Conectado às principais corretoras do Brasil e do Exterior</div>
-      <div class="corretoras__marquee">
-        <span class="corretoras__item"><span class="corretoras__flag">B3</span>XP</span>
-        <span class="corretoras__item"><span class="corretoras__flag">B3</span>BTG Pactual</span>
-        <span class="corretoras__item"><span class="corretoras__flag">B3</span>Inter</span>
-        <span class="corretoras__item"><span class="corretoras__flag">B3</span>Rico</span>
-        <span class="corretoras__item"><span class="corretoras__flag">B3</span>Clear</span>
-        <span class="corretoras__item"><span class="corretoras__flag">B3</span>Genial</span>
-        <span class="corretoras__item"><span class="corretoras__flag">EXT</span>Morgan Stanley</span>
-        <span class="corretoras__item"><span class="corretoras__flag">EXT</span>Avenue</span>
-        <span class="corretoras__item"><span class="corretoras__flag">EXT</span>Nomad</span>
-        <span class="corretoras__item"><span class="corretoras__flag">EXT</span>Interactive Brokers</span>
-        <span class="corretoras__item"><span class="corretoras__flag">EXT</span>Charles Schwab</span>
+      <div class="corretoras__track">
+        <div class="corretoras__marquee">
+          {[...brokers, ...brokers].map((b, i) => (
+            <span class="corretoras__item" aria-hidden={i >= brokers.length ? 'true' : undefined}>
+              <span class="corretoras__logo">
+                <img src={`/assets/brokers/${b.logo}.png`} alt={b.name} loading="lazy" width="34" height="34" />
+              </span>
+              {b.name}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   </div>
