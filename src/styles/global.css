@@ -1523,3 +1523,76 @@ body[data-theme="light"] .cf-grid__text p { color: var(--fg-muted); }
 
 /* ── Light theme tweaks for new bits ─────────────────────── */
 body[data-theme="light"] .section--numbers { background: var(--gray-25) !important; }
+
+/* ───────────────────────────────────────────────────────────────
+   Advisors & accountants page (/assessores)
+   ─────────────────────────────────────────────────────────────── */
+/* hero needs bottom room (no corretoras strip below it here) */
+.hero--page { padding-bottom: 96px; }
+
+/* highlight band — reuses the steps-cta gradient look, full content */
+.adv-highlight { margin-top: 40px; }
+.adv-highlight .steps-cta__txt .t { font-size: 22px; }
+
+/* simple stat/benefit callout chips under the "como funciona" steps */
+.adv-note {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 18px 22px;
+  border-radius: 14px;
+  background: var(--blue-50);
+  border: 1px solid rgba(21,94,239,0.18);
+  color: var(--sencon-ink);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.adv-note .check {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--sencon-blue);
+  color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+body[data-theme="light"] .adv-note { background: var(--blue-50); }
+
+/* ── FAQ accordion ───────────────────────────────────────── */
+.faq { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq__item {
+  border: 1px solid var(--border-default);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.faq__item[open] { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+.faq__item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 24px;
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--sencon-ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: '+';
+  font-size: 24px;
+  line-height: 1;
+  color: var(--sencon-blue);
+  font-weight: 400;
+  flex-shrink: 0;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item p { margin: 0; padding: 0 24px 22px; color: var(--fg-muted); font-size: 15px; line-height: 1.62; }
