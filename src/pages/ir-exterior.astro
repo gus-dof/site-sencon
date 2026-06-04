@@ -1,0 +1,679 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import FabWhats from '../components/FabWhats.astro'
+
+const title = 'Sencon · IR Exterior — Imposto de Renda de investimentos no exterior, no automático'
+const description =
+  'IR Exterior da Sencon: cálculo automático de Imposto de Renda para ações, ETFs, REITs, dividendos e aplicações financeiras no exterior. Câmbio PTAX e Lei 14.754/23 aplicados sozinhos, com DARF emitido — sem planilha de dólar.'
+
+/* ── Line-icon set (matches the design system) ───────────────────── */
+const icons: Record<string, string> = {
+  ChevronR: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
+  Check: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  Star: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>',
+  Globe: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+  FileText: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>',
+  Calculator: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><circle cx="8" cy="11" r="0.6" fill="currentColor"/><circle cx="12" cy="11" r="0.6" fill="currentColor"/><circle cx="16" cy="11" r="0.6" fill="currentColor"/><circle cx="8" cy="15" r="0.6" fill="currentColor"/><circle cx="12" cy="15" r="0.6" fill="currentColor"/><line x1="16" y1="14" x2="16" y2="18"/></svg>',
+  BarChart: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/></svg>',
+  Upload: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>',
+  Eye: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  Download: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+  Layers: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+  Bolt: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  Link: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+  ShieldCheck: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11.5 14.5 16 9.5"/></svg>',
+  Receipt: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v17l-3-2-2 2-2-2-2 2-2-2-3 2z"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/></svg>',
+  ArrowRight: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>',
+  Activity: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+  DollarSign: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+  RefreshCw: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>',
+}
+
+/* ── Premium "technical" placeholder shots ───────────────────────── */
+const X = '<span class="cf-x tl"></span><span class="cf-x tr"></span><span class="cf-x bl"></span><span class="cf-x br"></span>'
+function shotPanel(o: { label: string; note?: string; dim?: string; icon?: string; minHeight?: number }) {
+  const ic = icons[o.icon || 'Eye']
+  return `<div class="ppshot showcase__shot"${o.minHeight ? ` style="min-height:${o.minHeight}px"` : ''}>${X}
+    <div class="ppshot__tag">
+      <span class="ppshot__chip">${ic}${o.label}</span>
+      ${o.note ? `<span class="ppshot__note">${o.note}</span>` : ''}
+      ${o.dim ? `<span class="ppshot__dim">${o.dim}</span>` : ''}
+    </div>
+  </div>`
+}
+function shotFrame(o: { url?: string; label: string; note?: string; dim?: string; icon?: string; height?: number }) {
+  const url = o.url || 'app.sencon.com.br/ir-exterior'
+  const h = o.height || 440
+  const ic = icons[o.icon || 'Eye']
+  return `<div class="scframe showcase__shot">
+    <div class="mockup__chrome">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="url">${url}</span>
+    </div>
+    <div class="ppshot" style="border:0;border-radius:0;min-height:${h}px">${X}
+      <div class="ppshot__tag">
+        <span class="ppshot__chip">${ic}${o.label}</span>
+        ${o.note ? `<span class="ppshot__note">${o.note}</span>` : ''}
+        ${o.dim ? `<span class="ppshot__dim">${o.dim}</span>` : ''}
+      </div>
+    </div>
+  </div>`
+}
+
+/* ── Corretoras do exterior (hero strip) ─────────────────────────── */
+const brokers = [
+  { name: 'Avenue', logo: 'avenue' },
+  { name: 'Nomad', logo: 'nomad' },
+  { name: 'Interactive Brokers', logo: 'ibkr' },
+  { name: 'Morgan Stanley', logo: 'morganstanley' },
+  { name: 'Charles Schwab', logo: 'schwab' },
+]
+/* The marquee animates translateX(-50%), so it only loops seamlessly when
+   one half of the track is wider than the viewport. With few brokers we
+   repeat the list so each half stays wide enough. */
+const marqueeHalf = [...brokers, ...brokers]
+const marqueeItems = [...marqueeHalf, ...marqueeHalf]
+
+/* ── Content arrays ──────────────────────────────────────────────── */
+const fxBlurbs = [
+  { n: '01', t: 'Lei 14.754/23 aplicada', d: 'Aplicações financeiras, offshore e trusts tributados pelas novas regras — sem você decorar artigo.' },
+  { n: '02', t: 'Câmbio PTAX automático', d: 'Cada operação convertida pela cotação oficial do Banco Central — compra e venda — sem busca manual.' },
+  { n: '03', t: 'Ganho de capital e dividendos', d: 'Venda de ações, ETFs e REITs e os dividendos recebidos lá fora, cada um no seu imposto.' },
+  { n: '04', t: 'Prejuízo que compensa', d: 'Perdas em aplicações financeiras abatem ganhos do mesmo tipo, dentro do que a lei permite.' },
+]
+const fxAssets = [
+  { ico: 'BarChart', t: 'Ações US', k: 'Stocks & ADRs' },
+  { ico: 'Activity', t: 'ETFs', k: 'Índice no exterior' },
+  { ico: 'Layers', t: 'REITs', k: 'Fundos imobiliários' },
+  { ico: 'DollarSign', t: 'Dividendos', k: 'Recebidos lá fora' },
+  { ico: 'Bolt', t: 'Aplicações', k: 'Alíquota de 15%' },
+  { ico: 'Calculator', t: 'Ganho de capital', k: 'Venda de bens' },
+  { ico: 'Globe', t: 'Offshore', k: 'Entidades controladas' },
+  { ico: 'ShieldCheck', t: 'Trust', k: 'Patrimônio no exterior' },
+  { ico: 'RefreshCw', t: 'Câmbio PTAX', k: 'Compra & venda' },
+  { ico: 'Receipt', t: 'Carnê-leão', k: 'Rendimentos mensais' },
+]
+
+const fxUseCases = [
+  { t: 'Aplicações financeiras (anual)', d: 'Apure os 15% sobre aplicações financeiras no exterior, com câmbio PTAX, prontos para a declaração anual.', label: 'screenshot · Aplicações no exterior', icon: 'DollarSign' },
+  { t: 'Ganho de capital na venda', d: 'Vendeu ações ou ETFs lá fora? Calculamos o ganho de capital convertido em reais e geramos o DARF.', label: 'screenshot · Ganho de capital', icon: 'Calculator' },
+  { t: 'Dividendos e carnê-leão', d: 'Dividendos recebidos no exterior entram no carnê-leão automaticamente, mês a mês, sem cálculo manual.', label: 'screenshot · Carnê-leão', icon: 'Receipt' },
+]
+
+const fxPersonas = [
+  { k: 'Perfil 01', t: 'Investidor global', d: 'Tem ações e ETFs na Avenue ou Nomad e quer declarar o exterior sem virar especialista em câmbio.', photo: 'casual', alt: 'Investidor global sorrindo' },
+  { k: 'Perfil 02', t: 'Trader internacional', d: 'Opera ativos lá fora com frequência e precisa do ganho de capital e do carnê-leão sempre em dia.', photo: 'trader', alt: 'Trader internacional em ambiente de trabalho' },
+  { k: 'Perfil 03', t: 'Patrimônio offshore', d: 'Tem offshore, trust ou aplicações maiores e quer a Lei 14.754/23 aplicada sem risco.', photo: 'multi', alt: 'Investidora com patrimônio offshore' },
+]
+
+const fxPosts = [
+  { tag: 'Guia', t: 'Como declarar ações e ETFs no exterior no Imposto de Renda', label: 'capa · Guia do exterior', icon: 'FileText' },
+  { tag: 'Lei 14.754', t: 'A nova lei dos investimentos no exterior: o que muda na sua declaração', label: 'capa · Lei 14.754/23', icon: 'ShieldCheck' },
+  { tag: 'Câmbio', t: 'Câmbio PTAX: como converter seus dólares para apurar o IR', label: 'capa · Câmbio PTAX', icon: 'RefreshCw' },
+]
+
+const testimonials = [
+  { quote: 'Eu não fazia ideia de como declarar minha conta na Avenue. A Sencon converteu tudo pela PTAX e gerou o DARF. Resolveu.', name: 'Marina Salles', role: 'Investidora no exterior · ações e ETFs' },
+  { quote: 'A nova lei me deixou perdido. A Sencon aplicou a 14.754 sozinha e me mostrou exatamente o que eu tinha que pagar.', name: 'Rodrigo Penna', role: 'Investidor · offshore' },
+]
+const initials = (n: string) => n.split(' ').filter(Boolean).slice(0, 2).map((s) => s[0]).join('')
+
+const faq = [
+  { q: 'Preciso entender da Lei 14.754/23 para usar?', a: 'Não. A Sencon aplica as novas regras de tributação de investimentos no exterior automaticamente. Você importa os extratos, confere e emite o DARF — sem precisar saber alíquotas, prazos ou interpretar a lei.' },
+  { q: 'Quais investimentos no exterior são cobertos?', a: 'Ações, ETFs, REITs e ADRs, dividendos, aplicações financeiras, ganho de capital na venda de bens, além de offshore, entidades controladas e trusts. Tudo convertido em reais e tributado conforme a regra de cada tipo.' },
+  { q: 'Como funciona a conversão de câmbio?', a: 'Usamos a cotação PTAX oficial do Banco Central — de compra ou de venda conforme a operação e a data — para converter cada movimentação em dólar (ou outra moeda) para reais. Você não precisa caçar a cotação do dia.' },
+  { q: 'A Sencon emite o DARF para mim?', a: 'Sim. Geramos o DARF no código correto para cada situação: ganho de capital, carnê-leão sobre dividendos ou aplicações financeiras. Se houver atraso, calculamos juros e multa automaticamente.' },
+  { q: 'E quem tem offshore ou trust?', a: 'O plano Premium apura entidades controladas no exterior (offshore) e trusts segundo a Lei 14.754/23, com a tributação anual aplicada e o relatório pronto para a declaração — acompanhado por um especialista Sencon.' },
+]
+
+const related = [
+  { idx: '01', title: 'IR B3', desc: 'Apuração de IR para ações, FIIs, ETFs, opções e day trade na bolsa brasileira.', href: '/ir-b3' },
+  { idx: '03', title: 'Controle de Resultados', desc: 'Relatórios de lucro, prejuízo e DARFs emitidos para acompanhar a carteira.', href: '#' },
+  { idx: '04', title: 'Contador', desc: 'A inteligência artificial da Sencon que apura impostos e tira dúvidas 24/7.', href: '/#contador' },
+]
+---
+<Layout title={title} description={description}>
+  <Navbar />
+  <main>
+    <!-- ═══ 01 · Hero (clean, left-aligned) ════════════════════════ -->
+    <section class="pp-hero pp-hero--clean">
+      <div class="pp-hero__grain"></div>
+      <div class="container pp-hero__inner">
+        <span class="pp-eyebrow">
+          <span class="idx">01</span><span class="sep"></span> IR Exterior · Investimentos lá fora
+        </span>
+        <h1 class="pp-hero__title">
+          Apure o IR dos investimentos lá fora <span class="accent">como um fluxo.</span>
+        </h1>
+        <p class="pp-hero__sub">
+          Da corretora no exterior ao DARF, com câmbio PTAX e a Lei 14.754/23 aplicados sozinhos. Sem planilha de dólar.
+        </p>
+        <div class="pp-hero__cta">
+          <a href="#" class="btn btn--primary btn--lg" id="irext-hero-product">Contratar agora <Fragment set:html={icons.ChevronR} /></a>
+        </div>
+      </div>
+      <div class="container" style="margin-top:56px">
+        <div class="corretoras corretoras--on-brand">
+          <div class="corretoras__label">Conectado às principais corretoras do exterior</div>
+          <div class="corretoras__track">
+            <div class="corretoras__marquee">
+              {marqueeItems.map((b, i) => (
+                <span class="corretoras__item" aria-hidden={i >= marqueeHalf.length ? 'true' : undefined}>
+                  <span class="corretoras__logo">
+                    <img src={`/assets/brokers/${b.logo}.png`} alt={b.name} loading="lazy" width="34" height="34" />
+                  </span>
+                  {b.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 02 · Bento — "Do extrato em dólar ao DARF" ═════════════ -->
+    <section class="pp-section section--light">
+      <div class="container">
+        <div class="pp-head">
+          <span class="pp-label"><span class="idx">1.0</span> Uma esteira só</span>
+          <h2>Do extrato em dólar ao DARF, num só lugar.</h2>
+          <p>Pare de converter câmbio na planilha e caçar a PTAX do dia. Cada etapa da apuração no exterior vive na mesma esteira — e já sai em reais.</p>
+        </div>
+        <div class="fx-bento">
+          <div class="fx-tile fx-tile--feature">
+            <div class="fx-tile__media">
+              <!-- Animated "apuração" illustration -->
+              <div class="bz-illo" id="bz-illo" role="img" aria-label="Ilustração: ações, ETFs e dividendos no exterior são convertidos pela PTAX, apurados e geram um DARF pronto.">
+                <svg viewBox="0 0 360 332" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <path class="bz-edge" d="M66,58 C66,112 130,98 150,130" vector-effect="non-scaling-stroke" />
+                  <path class="bz-edge" d="M165,58 C165,102 176,102 178,122" vector-effect="non-scaling-stroke" />
+                  <path class="bz-edge" d="M279,58 C279,112 230,98 210,130" vector-effect="non-scaling-stroke" />
+                  <path class="bz-edge" d="M180,236 L180,266" vector-effect="non-scaling-stroke" />
+                  <g>
+                    <rect class="bz-chip-r" x="14" y="24" width="104" height="34" rx="9" />
+                    <circle class="bz-dot" cx="30" cy="41" r="3.5" />
+                    <text class="bz-chip-t" x="44" y="46">Ações US</text>
+                  </g>
+                  <g>
+                    <rect class="bz-chip-r" x="132" y="24" width="66" height="34" rx="9" />
+                    <circle class="bz-dot bz-dot--2" cx="148" cy="41" r="3.5" />
+                    <text class="bz-chip-t" x="162" y="46">ETFs</text>
+                  </g>
+                  <g>
+                    <rect class="bz-chip-r" x="212" y="24" width="134" height="34" rx="9" />
+                    <circle class="bz-dot bz-dot--3" cx="228" cy="41" r="3.5" />
+                    <text class="bz-chip-t" x="242" y="46">Dividendos</text>
+                  </g>
+                  <circle class="bz-core" cx="180" cy="178" r="62" />
+                  <circle class="bz-track" cx="180" cy="178" r="56" />
+                  <circle class="bz-prog" id="bz-prog" cx="180" cy="178" r="56" transform="rotate(-90 180 178)" />
+                  <text class="bz-val" id="bz-val" x="180" y="176" text-anchor="middle">R$ 0,00</text>
+                  <text class="bz-lab" x="180" y="198" text-anchor="middle">IMPOSTO DEVIDO</text>
+                  <rect class="bz-darf-r" x="110" y="270" width="140" height="42" rx="13" />
+                  <path class="bz-check" d="M132,291 l5,6 l10,-12" />
+                  <text class="bz-darf-t" x="162" y="296">DARF pronto</text>
+                </svg>
+              </div>
+            </div>
+            <div class="fx-tile__cap">
+              <h3>Tudo conectado, ponta a ponta</h3>
+              <p>Importou os extratos e o imposto já aparece em reais — com câmbio PTAX aplicado e a Lei 14.754/23 calculada automaticamente.</p>
+            </div>
+          </div>
+          <div class="fx-tile fx-mini">
+            <span class="fx-mini__ico"><Fragment set:html={icons.Upload} /></span>
+            <div>
+              <div class="fx-mini__t">Importar extratos</div>
+              <div class="fx-mini__d">Statements das corretoras no exterior (.csv) ou sincronização.</div>
+            </div>
+            <span class="fx-mini__step">01</span>
+          </div>
+          <div class="fx-tile fx-mini">
+            <span class="fx-mini__ico"><Fragment set:html={icons.RefreshCw} /></span>
+            <div>
+              <div class="fx-mini__t">Converter e apurar</div>
+              <div class="fx-mini__d">Câmbio PTAX aplicado e imposto calculado, item a item.</div>
+            </div>
+            <span class="fx-mini__step">02</span>
+          </div>
+          <div class="fx-tile fx-mini">
+            <span class="fx-mini__ico"><Fragment set:html={icons.Receipt} /></span>
+            <div>
+              <div class="fx-mini__t">Emitir DARF</div>
+              <div class="fx-mini__d">Ganho de capital, carnê-leão ou aplicações — no código certo.</div>
+            </div>
+            <span class="fx-mini__step">03</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 03 · Cobertura ═════════════════════════════════════════ -->
+    <section class="pp-section section--gray">
+      <div class="container">
+        <div class="pp-head">
+          <span class="pp-label"><span class="idx">2.0</span> Cobertura</span>
+          <h2>Tudo o que o exterior gera, já coberto.</h2>
+          <p>Do investidor com algumas ações na Avenue ao patrimônio com offshore: cada tipo de rendimento e cada regra da nova lei já estão na esteira, sem configuração.</p>
+        </div>
+        <div class="fx-blurbs">
+          {fxBlurbs.map((b) => (
+            <div class="fx-blurb">
+              <h4><span class="n">{b.n}</span> {b.t}</h4>
+              <p>{b.d}</p>
+            </div>
+          ))}
+        </div>
+        <div class="fx-assets">
+          {fxAssets.map((a) => (
+            <div class="fx-asset">
+              <span class="fx-asset__ico"><Fragment set:html={icons[a.ico]} /></span>
+              <div>
+                <div class="fx-asset__t">{a.t}</div>
+                <div class="fx-asset__k">{a.k}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 04 · Casos de uso (tabs) ═══════════════════════════════ -->
+    <section class="pp-section section--light">
+      <div class="container">
+        <div class="pp-head">
+          <span class="pp-label"><span class="idx">3.0</span> Casos de uso</span>
+          <h2>Transforme sua apuração num sistema.</h2>
+          <p>A mesma esteira resolve as aplicações, o ganho de capital e os dividendos do exterior. Escolha um fluxo para ver como funciona.</p>
+        </div>
+        <div class="fx-usecases">
+          <div class="fx-uc-list" role="tablist" id="fx-uc-list">
+            {fxUseCases.map((u, i) => (
+              <button class="fx-uc-item" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-uc={i}>
+                <h4>{u.t}</h4>
+                <p>{u.d}</p>
+              </button>
+            ))}
+          </div>
+          <div class="fx-uc-stage">
+            <div id="fx-uc-stage"><Fragment set:html={shotFrame({ label: fxUseCases[0].label, note: 'Troque o fluxo na lista ao lado para ver a tela correspondente.', dim: '1280 × 800', height: 420, icon: fxUseCases[0].icon })} /></div>
+            <div class="fx-uc-mobile"><Fragment set:html={shotPanel({ label: 'mobile', minHeight: 200, icon: fxUseCases[0].icon })} /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 05 · Personas ══════════════════════════════════════════ -->
+    <section class="pp-section section--gray">
+      <div class="container">
+        <div class="pp-head">
+          <span class="pp-label"><span class="idx">4.0</span> Para quem é</span>
+          <h2>Feito para quem investe no mundo todo.</h2>
+          <p>Não importa o tamanho da carteira ou o país onde você investe — a esteira se adapta ao seu perfil.</p>
+        </div>
+        <div class="fx-personas">
+          {fxPersonas.map((p) => (
+            <div class="fx-persona">
+              <div class="fx-persona__media">
+                <img src={`/assets/personas/${p.photo}.jpg`} alt={p.alt} loading="lazy" />
+              </div>
+              <div class="fx-persona__cap">
+                <span class="fx-persona__k">{p.k}</span>
+                <h3>{p.t}</h3>
+                <p>{p.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 06 · Onde usar (Web / API) ═════════════════════════════ -->
+    <section class="pp-section section--light">
+      <div class="container">
+        <div class="pp-head">
+          <span class="pp-label"><span class="idx">5.0</span> Onde usar</span>
+          <h2>No navegador hoje. Integrado em breve.</h2>
+        </div>
+        <div class="fx-webapi">
+          <div class="fx-wa">
+            <div class="fx-wa__cap">
+              <h3>Use no navegador</h3>
+              <p>Comece a apurar direto no app da Sencon, sem instalar nada. Importe os extratos e converta o câmbio em minutos.</p>
+              <a href="#" class="btn btn--primary" id="irext-webapi-start">Começar agora <Fragment set:html={icons.ChevronR} /></a>
+            </div>
+            <div class="fx-wa__media"><Fragment set:html={shotFrame({ label: 'screenshot · App Sencon no navegador', note: 'Painel da esteira de apuração do exterior rodando no navegador.', height: 220, icon: 'BarChart' })} /></div>
+          </div>
+          <div class="fx-wa">
+            <div class="fx-wa__cap">
+              <h3>Importação automática</h3>
+              <p>Sincronize as principais corretoras do exterior e mantenha a apuração sempre atualizada, sem upload manual de extratos.</p>
+              <span class="fx-wa__soon">Em breve</span>
+            </div>
+            <div class="fx-wa__media"><Fragment set:html={shotPanel({ label: 'ilustração · Sincronização de corretoras', note: 'Conexões automáticas com as corretoras do exterior.', icon: 'Link', minHeight: 220 })} /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 07 · Depoimentos ═══════════════════════════════════════ -->
+    <section class="pp-section section--gray">
+      <div class="container">
+        <div class="pp-head">
+          <span class="pp-label"><span class="idx">6.0</span> Depoimentos</span>
+          <h2>Quem investe lá fora confia na Sencon.</h2>
+        </div>
+        <div class="testi-summary">
+          <div class="rating">4,9</div>
+          <div class="meta">
+            <div class="stars"><Fragment set:html={icons.Star + icons.Star + icons.Star + icons.Star + icons.Star} /></div>
+            <div class="t">Excelente</div>
+            <div class="d">avaliação média · &gt; 2 mil avaliações</div>
+          </div>
+        </div>
+        <div class="testi">
+          {testimonials.map((it) => (
+            <article class="testi__card">
+              <div class="testi__stars"><Fragment set:html={icons.Star + icons.Star + icons.Star + icons.Star + icons.Star} /></div>
+              <p class="testi__quote">{it.quote}</p>
+              <div class="testi__author">
+                <div class="testi__avatar">{initials(it.name)}</div>
+                <div>
+                  <div class="name">{it.name}</div>
+                  <div class="role">{it.role}</div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 08 · Planos ════════════════════════════════════════════ -->
+    <section class="pp-section section--light" id="planos">
+      <div class="container">
+        <div class="pp-head">
+          <span class="pp-label"><span class="idx">7.0</span> Planos</span>
+          <h2>Escolha como quer cuidar do seu IR.</h2>
+          <p>Comece grátis e faça você mesmo, ou deixe um especialista Sencon fechar tudo por você.</p>
+        </div>
+        <div class="plans">
+          <div class="plan">
+            <div class="plan__head">
+              <span class="plan__flag"><Fragment set:html={icons.Globe} /></span>
+              <span class="plan__title">Essencial</span>
+            </div>
+            <p class="plan__sub">Para quem investe no exterior e quer apurar o IR sozinho, sem planilha de dólar.</p>
+            <div class="plan__price">
+              <span class="currency">R$</span><span class="amount">49</span><span class="cents">,90</span><span class="period">/mês</span>
+            </div>
+            <ul>
+              <li><span class="check"><Fragment set:html={icons.Check} /></span> Cálculo de aplicações, ganho de capital e dividendos</li>
+              <li><span class="check"><Fragment set:html={icons.Check} /></span> Câmbio PTAX aplicado automaticamente</li>
+              <li><span class="check"><Fragment set:html={icons.Check} /></span> Geração ilimitada de DARFs</li>
+              <li><span class="check"><Fragment set:html={icons.Check} /></span> Relatório para a declaração anual</li>
+            </ul>
+            <a href="#" class="btn btn--secondary btn--lg" id="irext-plan-essencial">Começar grátis</a>
+          </div>
+          <div class="plan plan--featured">
+            <span class="plan__tag">Mais escolhido</span>
+            <div class="plan__head">
+              <span class="plan__flag"><Fragment set:html={icons.ShieldCheck} /></span>
+              <span class="plan__title">Premium</span>
+            </div>
+            <p class="plan__sub">Um analista Sencon apura offshore, trust e declaração de ponta a ponta.</p>
+            <div class="plan__price">
+              <span class="currency">R$</span><span class="amount">119</span><span class="cents">,90</span><span class="period">/mês</span>
+            </div>
+            <ul>
+              <li><span class="check"><Fragment set:html={icons.Check} /></span> Tudo do plano Essencial</li>
+              <li><span class="check"><Fragment set:html={icons.Check} /></span> Apuração de offshore, trust e entidades controladas</li>
+              <li><span class="check"><Fragment set:html={icons.Check} /></span> Declaração anual completa incluída</li>
+              <li><span class="check"><Fragment set:html={icons.Check} /></span> Atendimento prioritário no WhatsApp</li>
+            </ul>
+            <a href="#" class="btn btn--primary btn--lg" id="irext-plan-premium">Falar com especialista</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 09 · FAQ ═══════════════════════════════════════════════ -->
+    <section class="pp-section section--gray">
+      <div class="container">
+        <div class="pp-head">
+          <span class="pp-label"><span class="idx">8.0</span> Perguntas frequentes</span>
+          <h2>Ainda em dúvida?</h2>
+        </div>
+        <div class="pp-faq" id="pp-faq">
+          {faq.map((f, i) => (
+            <div class="pp-faq__item" data-open={i === 0 ? '1' : '0'}>
+              <button class="pp-faq__q" aria-expanded={i === 0 ? 'true' : 'false'}>
+                {f.q}
+                <span class="pp-faq__icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </span>
+              </button>
+              <div class="pp-faq__a" style={`max-height:${i === 0 ? '320px' : '0'}`}>
+                <div class="pp-faq__a-inner">{f.a}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 10 · Conteúdos ═════════════════════════════════════════ -->
+    <section class="pp-section section--gray" style="padding-top:0">
+      <div class="container">
+        <div class="fx-head-row">
+          <div class="pp-head" style="max-width:620px">
+            <span class="pp-label"><span class="idx">9.0</span> Conteúdos</span>
+            <h2>Aprenda a cuidar do seu IR.</h2>
+          </div>
+          <a href="#" class="fx-alllink">Ver todos os conteúdos <Fragment set:html={icons.ArrowRight} /></a>
+        </div>
+        <div class="fx-posts">
+          {fxPosts.map((p) => (
+            <a class="fx-post" href="#">
+              <div class="fx-post__media"><Fragment set:html={shotPanel({ label: p.label, icon: p.icon, minHeight: 170 })} /></div>
+              <div class="fx-post__cap">
+                <span class="fx-post__tag">{p.tag}</span>
+                <h3>{p.t}</h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 11 · Produtos relacionados ═════════════════════════════ -->
+    <section class="pp-section section--light">
+      <div class="container">
+        <div class="pp-head">
+          <span class="pp-label">Continue explorando</span>
+          <h2>Outros produtos Sencon.</h2>
+        </div>
+        <div class="pp-related">
+          {related.map((r) => (
+            <a class="pp-related-card" href={r.href}>
+              <span class="pp-related-card__idx">{r.idx}</span>
+              <h4>{r.title}</h4>
+              <p>{r.desc}</p>
+              <span class="pp-related-card__more">Conhecer <Fragment set:html={icons.ArrowRight} /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 12 · CTA final ═════════════════════════════════════════ -->
+    <section class="pp-section section--light" style="padding-top:0">
+      <div class="container">
+        <div class="finalcta">
+          <div>
+            <span class="eyebrow" style="color:#6B9DFF">Comece em 3 passos</span>
+            <h2 style="margin-top:16px">Foque nos investimentos. Deixe o IR do exterior com a Sencon.</h2>
+            <p>Importe seus extratos, converta o câmbio e emita o DARF — em poucos cliques. Em dia com a Receita Federal e com a Lei 14.754/23, sem planilhas.</p>
+          </div>
+          <div class="finalcta__actions">
+            <a href="#" class="btn btn--primary btn--lg" id="irext-final-start">Começar agora, grátis</a>
+            <a href="#planos" class="btn btn--ghost-dark btn--lg">Ver planos e preços</a>
+            <div style="text-align:center;font-size:13px;color:var(--ink-fg-subtle);margin-top:6px">
+              Sem cartão de crédito · cancele quando quiser
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <FabWhats />
+</Layout>
+
+<style is:global>
+  /* IR Exterior — testimonials summary left-aligned with the section title */
+  .pp-section .testi-summary { justify-content: flex-start; text-align: left; }
+
+  /* IR Exterior — FAQ fills the full page grid (edge-to-edge), aligned with the title */
+  .pp-faq { max-width: none; margin: 0; }
+  .pp-faq__a-inner { max-width: none; }
+
+  /* IR Exterior — investor photos fill the persona cards */
+  .fx-persona__media { min-height: 240px; overflow: hidden; }
+  .fx-persona__media img {
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    object-fit: cover;
+    object-position: center 28%;
+    display: block;
+  }
+</style>
+
+<script
+  is:inline
+  define:vars={{ ucData: fxUseCases, ucIcons: Object.fromEntries(fxUseCases.map((u) => [u.icon, icons[u.icon]])) }}
+>
+  /* ── Use-case tabs (hover / click swaps the stage) ── */
+  ;(function () {
+    const list = document.getElementById('fx-uc-list')
+    const stage = document.getElementById('fx-uc-stage')
+    if (!list || !stage) return
+    const chip = () => stage.querySelector('.ppshot__chip')
+    const select = (i) => {
+      list.querySelectorAll('.fx-uc-item').forEach((b, j) =>
+        b.setAttribute('aria-selected', j === i ? 'true' : 'false')
+      )
+      const uc = ucData[i]
+      const c = chip()
+      if (c) c.innerHTML = (ucIcons[uc.icon] || '') + uc.label
+    }
+    list.querySelectorAll('.fx-uc-item').forEach((b) => {
+      const i = parseInt(b.getAttribute('data-uc'), 10)
+      b.addEventListener('mouseenter', () => select(i))
+      b.addEventListener('click', () => select(i))
+    })
+  })()
+
+  /* ── FAQ accordion ── */
+  ;(function () {
+    const root = document.getElementById('pp-faq')
+    if (!root) return
+    const items = Array.from(root.querySelectorAll('.pp-faq__item'))
+    items.forEach((item) => {
+      const q = item.querySelector('.pp-faq__q')
+      const a = item.querySelector('.pp-faq__a')
+      q?.addEventListener('click', () => {
+        const isOpen = item.getAttribute('data-open') === '1'
+        items.forEach((it) => {
+          it.setAttribute('data-open', '0')
+          it.querySelector('.pp-faq__q')?.setAttribute('aria-expanded', 'false')
+          const aa = it.querySelector('.pp-faq__a')
+          if (aa) aa.style.maxHeight = '0px'
+        })
+        if (!isOpen) {
+          item.setAttribute('data-open', '1')
+          q.setAttribute('aria-expanded', 'true')
+          if (a) a.style.maxHeight = '320px'
+        }
+      })
+    })
+  })()
+
+  /* ── Bento illustration: count-up + progress ring ── */
+  ;(function () {
+    const wrap = document.getElementById('bz-illo')
+    const valEl = document.getElementById('bz-val')
+    const prog = document.getElementById('bz-prog')
+    if (!wrap || !valEl || !prog) return
+    const target = 1284.5
+    const R = 56
+    const C = 2 * Math.PI * R
+    prog.setAttribute('stroke-dasharray', String(C))
+    prog.setAttribute('stroke-dashoffset', String(C))
+    const apply = (p) => {
+      const money =
+        'R$ ' + (target * p).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+      valEl.textContent = money
+      prog.setAttribute('stroke-dashoffset', String(C * (1 - p * 0.78)))
+    }
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const animOff = document.body.getAttribute('data-illo-anim') === 'off'
+    if (reduce || animOff) {
+      apply(1)
+      return
+    }
+    let started = false
+    const run = () => {
+      if (started) return
+      started = true
+      const dur = 1700
+      let startT = null
+      const step = (t) => {
+        if (startT == null) startT = t
+        const k = Math.min(1, (t - startT) / dur)
+        apply(1 - Math.pow(1 - k, 3))
+        if (k < 1) requestAnimationFrame(step)
+      }
+      requestAnimationFrame(step)
+      setTimeout(() => apply(1), 2400)
+    }
+    const inView = () => {
+      const r = wrap.getBoundingClientRect()
+      return r.top < window.innerHeight && r.bottom > 0
+    }
+    if (inView()) run()
+    try {
+      const io = new IntersectionObserver(
+        (e) => {
+          if (e[0].isIntersecting) {
+            run()
+            io.disconnect()
+          }
+        },
+        { threshold: 0.35 }
+      )
+      io.observe(wrap)
+    } catch (_) {
+      const poll = setInterval(() => {
+        if (inView()) {
+          run()
+          clearInterval(poll)
+        }
+      }, 250)
+    }
+  })()
+
+  /* ── PostHog tracking ── */
+  ;(function () {
+    const track = (id, ev, props) =>
+      document.getElementById(id)?.addEventListener('click', () => window.posthog?.capture(ev, props))
+    track('irext-hero-product', 'irext_hero_contratar_clicked')
+    track('irext-webapi-start', 'irext_webapi_start_clicked')
+    track('irext-plan-essencial', 'irext_plan_clicked', { plan: 'Essencial' })
+    track('irext-plan-premium', 'irext_plan_clicked', { plan: 'Premium' })
+    track('irext-final-start', 'irext_final_cta_clicked')
+  })()
+</script>
