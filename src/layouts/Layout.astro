@@ -29,10 +29,10 @@ const {
     <script is:inline>
       (function () {
         try {
-          const saved = localStorage.getItem('sencon-theme') || 'dark'
+          const saved = localStorage.getItem('sencon-theme') || 'light'
           document.body.setAttribute('data-theme', saved)
         } catch (_) {
-          document.body.setAttribute('data-theme', 'dark')
+          document.body.setAttribute('data-theme', 'light')
         }
         // Illustration animations on by default (flow pulses, câmbio arc, etc.)
         document.body.setAttribute('data-illo-anim', 'on')
