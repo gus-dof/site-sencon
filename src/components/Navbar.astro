@@ -1,54 +1,74 @@
 ---
+const menus = [
+  {
+    label: 'Produtos',
+    items: [
+      { t: 'IR B3', d: 'Cálculo automático de IR para ações, FIIs, ETFs e day trade na bolsa brasileira.', href: '#' },
+      { t: 'IR Exterior', d: 'Imposto sobre investimentos no exterior, com câmbio PTAX e Lei 14.754/23.', href: '#' },
+      { t: 'Controle de Resultados', d: 'Relatórios de lucro, prejuízo e DARFs emitidos, para acompanhar a evolução da carteira.', href: '#' },
+      { t: 'AI Contador', badge: 'NOVO', d: 'Seu contador com inteligência artificial, que apura impostos e tira dúvidas 24/7.', href: '#contador' },
+    ],
+  },
+  {
+    label: 'Soluções',
+    items: [
+      { t: 'Para investidores', d: 'Cálculo de IR para B3 e Exterior — do investidor casual ao trader ativo.', href: '#' },
+      { t: 'Para assessores', d: 'Gerencie o Imposto de Renda de toda a sua carteira de clientes.', href: '/assessores' },
+      { t: 'Para contadores', d: 'Relatórios e revisão contábil simplificada para o seu escritório.', href: '/assessores' },
+    ],
+  },
+  {
+    label: 'Recursos',
+    items: [
+      { t: 'Cálculo automático', d: 'Apuração de IR mês a mês, sem planilhas e sem erros.', href: '#' },
+      { t: 'Integração com corretoras', d: 'Importe notas SINACOR e conecte suas corretoras do Brasil e do Exterior.', href: '#' },
+      { t: 'Relatórios', d: 'Acompanhe lucro, prejuízo e a evolução da sua carteira.', href: '#' },
+      { t: 'Geração de DARFs', d: 'DARF pronto para pagar, com juros e multa calculados quando preciso.', href: '#' },
+      { t: 'AI Contador', badge: 'NOVO', d: 'Inteligência artificial que apura impostos e tira dúvidas 24/7.', href: '#contador' },
+    ],
+  },
+  {
+    label: 'Conteúdos',
+    items: [
+      { t: 'Blog e dicas', d: 'Guias, novidades e análises sobre Imposto de Renda.', href: '#' },
+      { t: 'Central de ajuda', d: 'Tutoriais, FAQ e atendimento ao cliente.', href: '#' },
+    ],
+  },
+]
+const num = (i: number) => String(i + 1).padStart(2, '0')
 ---
 <header class="navbar" id="navbar">
   <div class="container navbar__inner">
-    <a href="#" class="navbar__logo">
+    <a href="/" class="navbar__logo">
       <img src="/assets/logomark-sencon.png" alt="Sencon" />
       <span class="wm">Sencon</span>
     </a>
 
     <nav class="navbar__nav">
-      <a href="/" class="navbar__link">Home</a>
-      <a href="/assessores" class="navbar__link">Assessores e Contadores</a>
-      <a href="#" class="navbar__link">Loja</a>
-
-      <div class="navbar__drop">
-        <a href="#" class="navbar__link">
-          Serviços
-          <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </a>
-        <div class="navbar__drop-menu">
-          <a href="#" class="navbar__drop-item">
-            <span class="t">Para investidores</span>
-            <span class="d">Cálculo de IR para B3, Exterior e Cripto.</span>
+      {menus.map((menu) => (
+        <div class="navbar__drop">
+          <a href="#" class="navbar__link" style="font-size: 16px;">
+            {menu.label}
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </a>
-          <a href="/assessores" class="navbar__drop-item">
-            <span class="t">Para assessores e contadores</span>
-            <span class="d">Gerencie o IR da sua carteira de clientes.</span>
-          </a>
-          <a href="#" class="navbar__drop-item">
-            <span class="t">Para contabilidade</span>
-            <span class="d">Relatórios e revisão contábil simplificada.</span>
-          </a>
+          <div class="navbar__drop-menu navbar__drop-menu--products">
+            {menu.items.map((item, i) => (
+              <a href={item.href} class="navbar__prod-item">
+                <span class="n">{num(i)}</span>
+                <span class="bd">
+                  <span class="t">{item.t}{item.badge && <span class="navbar__prod-badge">{item.badge}</span>}</span>
+                  <span class="d">{item.d}</span>
+                </span>
+              </a>
+            ))}
+            <a href="#" class="navbar__prod-all">
+              <span>Ver todos os {menu.label.toLowerCase()}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+            </a>
+          </div>
         </div>
-      </div>
-
-      <div class="navbar__drop">
-        <a href="#" class="navbar__link">
-          Conteúdos
-          <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </a>
-        <div class="navbar__drop-menu">
-          <a href="#" class="navbar__drop-item">
-            <span class="t">Blog</span>
-            <span class="d">Guias, novidades e análises sobre IR.</span>
-          </a>
-          <a href="#" class="navbar__drop-item">
-            <span class="t">Central de ajuda</span>
-            <span class="d">Tutoriais, FAQ e atendimento ao cliente.</span>
-          </a>
-        </div>
-      </div>
+      ))}
+      <a href="#contador" class="navbar__link" style="font-size: 16px;">Preços</a>
     </nav>
 
     <div class="navbar__cta">
@@ -65,8 +85,8 @@
         </span>
       </button>
 
-      <a href="#" class="navbar__login" id="navbar-login-btn">Login</a>
-      <a href="#" class="btn btn--primary btn--sm" id="navbar-signup-btn">Cadastre-se</a>
+      <a href="#" class="navbar__login" id="navbar-login-btn" style="font-size: 16px;">Login</a>
+      <a href="#" class="btn btn--primary btn--sm" id="navbar-signup-btn" style="font-size: 16px;">Cadastre-se</a>
     </div>
   </div>
 </header>
@@ -93,7 +113,7 @@
 
   // Theme toggle
   toggle.addEventListener('click', () => {
-    const current = document.body.getAttribute('data-theme') || 'dark'
+    const current = document.body.getAttribute('data-theme') || 'light'
     const next = current === 'dark' ? 'light' : 'dark'
     document.body.setAttribute('data-theme', next)
     try { localStorage.setItem('sencon-theme', next) } catch (_) {}
