@@ -1,0 +1,155 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Navbar from '../../components/Navbar.astro'
+import Footer from '../../components/Footer.astro'
+import FabWhats from '../../components/FabWhats.astro'
+import '../../styles/blog.css'
+import {
+  ICONS,
+  catLabel,
+  catColor,
+  ARTICLES,
+  getPost,
+  relatedPosts,
+  postHref,
+  initialsOf,
+  type Post,
+} from '../../data/blog'
+
+export function getStaticPaths() {
+  return ARTICLES.map((p) => ({ params: { slug: p.slug } }))
+}
+
+const { slug } = Astro.params
+const post = getPost(slug!) as Post
+
+const title = `${post.title} · Blog Sencon`
+const description = post.excerpt ?? post.title
+const author = post.author ?? 'Equipe Sencon'
+const accent = catColor(post.cat)
+const related = relatedPosts(post.slug, 3)
+---
+
+<Layout title={title} description={description}>
+  <Navbar />
+  <main>
+    {/* ── header (centered, on the blog blue wash) ───────────── */}
+    <section class="bl-top ar-head">
+      <div class="container">
+        <div class="ar-head__inner">
+          <a class="ar-back" href="/blog">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="11 18 5 12 11 6"/></svg>
+            Voltar para o blog
+          </a>
+          <span class="bl-tag" style={`--c:${accent}`}>{catLabel(post.cat)}</span>
+          <h1>{post.title}</h1>
+          {post.excerpt && <p class="ar-head__dek">{post.excerpt}</p>}
+          <div class="ar-meta">
+            <span class="ar-meta__av">{initialsOf(author)}</span>
+            <span class="ar-meta__who">
+              <b>{author}</b>
+              <span>{post.date} · {post.read} de leitura</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── wide cover banner ──────────────────────────────────── */}
+    <div class="container">
+      <div class="bl-cover ar-cover" style={`--c:${accent}`}>
+        <span class="bl-cover__ico"><Fragment set:html={ICONS[post.icon]} /></span>
+        <span class="bl-cover__ph">{catLabel(post.cat)} · imagem</span>
+      </div>
+    </div>
+
+    {/* ── body ───────────────────────────────────────────────── */}
+    <article class="container">
+      <div class="ar-body">
+        {post.body?.map((block) => {
+          if (block.type === 'h2') return <h2>{block.text}</h2>
+          if (block.type === 'h3') return <h3>{block.text}</h3>
+          if (block.type === 'p') return <p set:html={block.html} />
+          if (block.type === 'ul')
+            return (
+              <ul>
+                {block.items.map((it) => (
+                  <li set:html={it} />
+                ))}
+              </ul>
+            )
+          if (block.type === 'ol')
+            return (
+              <ol>
+                {block.items.map((it) => (
+                  <li set:html={it} />
+                ))}
+              </ol>
+            )
+          if (block.type === 'quote')
+            return (
+              <blockquote>
+                <p set:html={block.html} />
+                {block.cite && <cite>{block.cite}</cite>}
+              </blockquote>
+            )
+          return null
+        })}
+      </div>
+    </article>
+
+    <hr class="ar-divider" />
+
+    {/* ── related articles ───────────────────────────────────── */}
+    <section class="bl-section--tight ar-related" style="padding-top:48px">
+      <div class="container">
+        <h2>Continue lendo</h2>
+        <div class="bl-grid">
+          {related.map((p) => (
+            <a class="bl-card" href={postHref(p)} style={`--c:${catColor(p.cat)}`}>
+              <div class="bl-cover" style={`--c:${catColor(p.cat)}`}>
+                <span class="bl-cover__ico"><Fragment set:html={ICONS[p.icon]} /></span>
+                <span class="bl-cover__ph">{catLabel(p.cat)} · imagem</span>
+              </div>
+              <div class="bl-card__cap">
+                <span class="bl-tag">{catLabel(p.cat)}</span>
+                <h3 class="bl-card__title">{p.title}</h3>
+                {p.excerpt && <p class="bl-card__excerpt">{p.excerpt}</p>}
+                <div class="bl-meta">
+                  <span>{p.date}</span><span class="sep"></span><span>{p.read} de leitura</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── CTA ────────────────────────────────────────────────── */}
+    <section class="bl-section">
+      <div class="container">
+        <div class="bl-cta">
+          <div>
+            <h2>Leu sobre IR. Agora deixe com a Sencon.</h2>
+            <p>Importe suas notas, apure o imposto e emita o DARF — na bolsa e no exterior, sem planilha.</p>
+            <div class="bl-cta__actions">
+              <a href="#" class="btn btn--primary btn--lg">Cadastre-se grátis</a>
+              <a href="/ir-b3" class="btn btn--ghost-dark btn--lg">Conhecer os produtos</a>
+            </div>
+          </div>
+          <div class="bl-cta__art">
+            <div class="ppshot" style="border:0;border-radius:0;min-height:220px;height:100%">
+              <span class="cf-x tl"></span><span class="cf-x tr"></span>
+              <span class="cf-x bl"></span><span class="cf-x br"></span>
+              <div class="ppshot__tag">
+                <span class="ppshot__chip"><Fragment set:html={ICONS.BarChart} /> ilustração · App Sencon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <FabWhats />
+</Layout>
