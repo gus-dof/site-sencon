@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import FabWhats from '../components/FabWhats.astro'
+import '../styles/blog.css'
+import { ICONS, CATS, catLabel, catColor, FEATURED, SIDE, POSTS, QUOTE, postHref, initialsOf } from '../data/blog'
+
+const title = 'Sencon · Blog — Imposto de Renda de investimentos'
+const description =
+  'O blog da Sencon: guias práticos, novidades e tudo sobre Imposto de Renda de investimentos na bolsa, no exterior e no day trade.'
+
+const quoteInitials = initialsOf(QUOTE.name)
+---
+
+<Layout title={title} description={description}>
+  <Navbar />
+  <main>
+    {/* ── header ─────────────────────────────────────────────── */}
+    <section class="bl-top">
+      <div class="container">
+        <span class="pp-eyebrow"><span class="idx">·</span> Conteúdos Sencon</span>
+        <h1>O blog da Sencon.</h1>
+        <p>
+          Guias práticos, novidades e tudo sobre Imposto de Renda de investimentos — na bolsa, no
+          exterior e no day trade.
+        </p>
+      </div>
+    </section>
+
+    {/* ── featured ───────────────────────────────────────────── */}
+    <section class="bl-section--tight" style="padding-top:28px">
+      <div class="container">
+        <div class="bl-featured">
+          <a class="bl-card bl-card--lg" href={postHref(FEATURED)} style={`--c:${catColor(FEATURED.cat)}`}>
+            <div class="bl-cover" style={`--c:${catColor(FEATURED.cat)}`}>
+              <span class="bl-cover__ico"><Fragment set:html={ICONS[FEATURED.icon]} /></span>
+              <span class="bl-cover__ph">{catLabel(FEATURED.cat)} · imagem</span>
+            </div>
+            <div class="bl-card__cap">
+              <span class="bl-tag">{catLabel(FEATURED.cat)}</span>
+              <h3 class="bl-card__title">{FEATURED.title}</h3>
+              <p class="bl-card__excerpt">{FEATURED.excerpt}</p>
+              <div class="bl-meta">
+                <span>{FEATURED.date}</span><span class="sep"></span><span>{FEATURED.read} de leitura</span>
+              </div>
+            </div>
+          </a>
+          <div class="bl-feat-side">
+            {SIDE.map((p) => (
+              <a class="bl-card bl-card--row" href={postHref(p)} style={`--c:${catColor(p.cat)}`}>
+                <div class="bl-cover" style={`--c:${catColor(p.cat)}`}>
+                  <span class="bl-cover__ico"><Fragment set:html={ICONS[p.icon]} /></span>
+                </div>
+                <div class="bl-card__cap">
+                  <span class="bl-tag">{catLabel(p.cat)}</span>
+                  <h3 class="bl-card__title">{p.title}</h3>
+                  <div class="bl-meta">
+                    <span>{p.date}</span><span class="sep"></span><span>{p.read} de leitura</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── testimonial band ───────────────────────────────────── */}
+    <section class="bl-section--tight">
+      <div class="container">
+        <div class="bl-quote">
+          <div class="bl-quote__inner">
+            <div class="bl-quote__mark">&ldquo;</div>
+            <p class="bl-quote__q">{QUOTE.q}</p>
+            <div class="bl-quote__who">
+              <span class="bl-quote__av">{quoteInitials}</span>
+              <span class="bl-quote__name">
+                <b>{QUOTE.name}</b>
+                <span>{QUOTE.role}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── article grid ───────────────────────────────────────── */}
+    <section class="bl-section--tight">
+      <div class="container">
+        <div class="bl-grid-head">
+          <h2>Todos os artigos</h2>
+          <span class="bl-count">{POSTS.length} artigos</span>
+        </div>
+
+        <div class="bl-cats" role="group" aria-label="Filtrar por categoria">
+          {CATS.map((c) => (
+            <button class="bl-cat" type="button" data-cat={c.id} aria-pressed={c.id === 'todos' ? 'true' : 'false'}>
+              {c.label}
+            </button>
+          ))}
+        </div>
+
+        <div class="bl-grid" style="margin-top:26px">
+          {POSTS.map((p) => (
+            <a class="bl-card" href={postHref(p)} data-cat={p.cat} style={`--c:${catColor(p.cat)}`}>
+              <div class="bl-cover" style={`--c:${catColor(p.cat)}`}>
+                <span class="bl-cover__ico"><Fragment set:html={ICONS[p.icon]} /></span>
+                <span class="bl-cover__ph">{catLabel(p.cat)} · imagem</span>
+              </div>
+              <div class="bl-card__cap">
+                <span class="bl-tag">{catLabel(p.cat)}</span>
+                <h3 class="bl-card__title">{p.title}</h3>
+                {p.excerpt && <p class="bl-card__excerpt">{p.excerpt}</p>}
+                <div class="bl-meta">
+                  <span>{p.date}</span><span class="sep"></span><span>{p.read} de leitura</span>
+                </div>
+              </div>
+            </a>
+          ))}
+          <div class="bl-empty" hidden>Nenhum artigo nesta categoria ainda. Volte em breve!</div>
+        </div>
+
+        <nav class="bl-page" aria-label="Paginação">
+          <span class="is-active">1</span>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <span class="gap">…</span>
+          <a href="#">8</a>
+          <a href="#" aria-label="Próxima página">→</a>
+        </nav>
+      </div>
+    </section>
+
+    {/* ── CTA ────────────────────────────────────────────────── */}
+    <section class="bl-section">
+      <div class="container">
+        <div class="bl-cta">
+          <div>
+            <h2>Leu sobre IR. Agora deixe com a Sencon.</h2>
+            <p>Importe suas notas, apure o imposto e emita o DARF — na bolsa e no exterior, sem planilha.</p>
+            <div class="bl-cta__actions">
+              <a href="#" class="btn btn--primary btn--lg">Cadastre-se grátis</a>
+              <a href="/ir-b3" class="btn btn--ghost-dark btn--lg">Conhecer os produtos</a>
+            </div>
+          </div>
+          <div class="bl-cta__art">
+            <div class="ppshot" style="border:0;border-radius:0;min-height:220px;height:100%">
+              <span class="cf-x tl"></span><span class="cf-x tr"></span>
+              <span class="cf-x bl"></span><span class="cf-x br"></span>
+              <div class="ppshot__tag">
+                <span class="ppshot__chip"><Fragment set:html={ICONS.BarChart} /> ilustração · App Sencon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <FabWhats />
+</Layout>
+
+<script>
+  // Filtragem por categoria (espelha o comportamento do protótipo React)
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.bl-cat'))
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.bl-grid .bl-card'))
+  const countEl = document.querySelector<HTMLElement>('.bl-count')
+  const pageNav = document.querySelector<HTMLElement>('.bl-page')
+  const emptyEl = document.querySelector<HTMLElement>('.bl-empty')
+
+  function apply(cat: string) {
+    let n = 0
+    cards.forEach((card) => {
+      const show = cat === 'todos' || card.dataset.cat === cat
+      card.hidden = !show
+      if (show) n++
+    })
+    if (countEl) countEl.textContent = `${n} ${n === 1 ? 'artigo' : 'artigos'}`
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cat === cat)))
+    if (pageNav) pageNav.style.display = cat === 'todos' ? '' : 'none'
+    if (emptyEl) emptyEl.hidden = n !== 0
+  }
+
+  buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.cat || 'todos')))
+</script>
