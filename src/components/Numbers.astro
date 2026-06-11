@@ -5,22 +5,56 @@
     <div class="numbers">
       <div class="numbers__cell">
         <div class="numbers__value">
-          <span class="numbers__plus">+</span>300<span class="numbers__unit">mil</span>
+          <span class="numbers__plus">+</span><span class="numbers__num" data-count="300">300</span><span class="numbers__unit">mil</span>
         </div>
         <div class="numbers__label">Clientes satisfeitos</div>
       </div>
       <div class="numbers__cell">
         <div class="numbers__value">
-          <span class="numbers__plus">+</span>20<span class="numbers__unit">milhões</span>
+          <span class="numbers__plus">+</span><span class="numbers__num" data-count="20">20</span><span class="numbers__unit">milhões</span>
         </div>
         <div class="numbers__label">Notas processadas</div>
       </div>
       <div class="numbers__cell">
         <div class="numbers__value">
-          <span class="numbers__plus">+</span>10<span class="numbers__unit">mil</span>
+          <span class="numbers__plus">+</span><span class="numbers__num" data-count="10">10</span><span class="numbers__unit">mil</span>
         </div>
         <div class="numbers__label">Melhorias no sistema</div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  // Count-up when the strip scrolls into view. Markup ships with the final
+  // values, so no-JS and reduced-motion users always see the real numbers.
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const nums = document.querySelectorAll<HTMLElement>('.numbers__num')
+  if (!reduced && nums.length && 'IntersectionObserver' in window) {
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
+    const animate = (el: HTMLElement) => {
+      const target = parseInt(el.dataset.count || '0', 10)
+      const dur = 1400
+      let start: number | null = null
+      const tick = (ts: number) => {
+        if (start === null) start = ts
+        const p = Math.min((ts - start) / dur, 1)
+        el.textContent = String(Math.round(easeOut(p) * target))
+        if (p < 1) requestAnimationFrame(tick)
+      }
+      el.textContent = '0'
+      requestAnimationFrame(tick)
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue
+          io.unobserve(e.target)
+          animate(e.target as HTMLElement)
+        }
+      },
+      { threshold: 0.4 },
+    )
+    nums.forEach((el) => io.observe(el))
+  }
+</script>

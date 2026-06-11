@@ -2057,6 +2057,320 @@ body[data-illo-anim="on"] .sk-spin { animation: skSpin 0.9s linear infinite; }
   .sk-feat__demo { height: 176px; }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ANIMATIONS v2 — entrance choreography, scroll reveal, refined
+   keyframes and micro-interactions. Everything respects
+   prefers-reduced-motion; decorative loops also respect the
+   body[data-illo-anim] gate.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Scroll reveal (driven by Layout's IntersectionObserver) ── */
+.rv {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.65s var(--ease-out),
+    transform 0.65s var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+.rv.rv--in { opacity: 1; transform: none; }
+
+/* ── Hero entrance — eyebrow → title → sub → CTAs → trust → shot ── */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes shotIn {
+  from { opacity: 0; transform: translateY(44px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+.hero__centered-inner > * { animation: riseIn 0.8s var(--ease-out) both; }
+.hero__centered-inner > .eyebrow { animation-delay: 0.08s; }
+.hero__centered-inner > h1 { animation-delay: 0.18s; }
+.hero__centered-inner > .hero__centered-sub { animation-delay: 0.32s; }
+.hero__centered-inner > .hero__centered-cta { animation-delay: 0.44s; }
+.hero__centered-inner > .hero__centered-trust { animation-delay: 0.56s; }
+.hero__shot-wrap { animation: shotIn 0.9s var(--ease-out) 0.5s both; }
+.corretoras--on-brand { animation: riseIn 0.8s var(--ease-out) 0.75s both; }
+
+/* ── Hero beams — smoother fade in/out along the ride ── */
+.hero__beam { filter: drop-shadow(0 0 8px rgba(107, 157, 255, 0.45)); }
+@keyframes beamH {
+  0%   { transform: translateX(0);     opacity: 0; }
+  6%   { opacity: 0.85; }
+  45%  { opacity: 1; }
+  92%  { opacity: 0.8; }
+  100% { transform: translateX(140vw); opacity: 0; }
+}
+@keyframes beamHrev {
+  0%   { transform: translateX(0);      opacity: 0; }
+  6%   { opacity: 0.85; }
+  45%  { opacity: 1; }
+  92%  { opacity: 0.8; }
+  100% { transform: translateX(-140vw); opacity: 0; }
+}
+@keyframes beamV {
+  0%   { transform: translateY(0);     opacity: 0; }
+  6%   { opacity: 0.85; }
+  45%  { opacity: 1; }
+  92%  { opacity: 0.8; }
+  100% { transform: translateY(120vh); opacity: 0; }
+}
+@keyframes beamVrev {
+  0%   { transform: translateY(0);      opacity: 0; }
+  6%   { opacity: 0.85; }
+  45%  { opacity: 1; }
+  92%  { opacity: 0.8; }
+  100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* ── Flow pulses — comet "breathes" while travelling the rail ── */
+@keyframes flowPulse {
+  0%   { left: 0%;   opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  10%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  50%  { transform: translate(-50%, -50%) scale(1.18); }
+  88%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { left: 100%; opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+}
+@keyframes flowPulseV {
+  0%   { top: 0%;   opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  10%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  50%  { transform: translate(-50%, -50%) scale(1.18); }
+  88%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { top: 100%; opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+}
+
+/* ── Navbar dropdown — settle in with a soft scale + chevron flip ── */
+.navbar__drop-menu {
+  transform: translateY(-8px) scale(0.985);
+  transform-origin: top left;
+  transition: opacity 0.22s var(--ease-out), transform 0.22s var(--ease-out);
+}
+.navbar__drop:hover .navbar__drop-menu,
+.navbar__drop:focus-within .navbar__drop-menu { transform: translateY(0) scale(1); }
+.navbar__link .chev { transition: transform var(--dur-base) var(--ease-out); }
+.navbar__drop:hover .navbar__link .chev { transform: rotate(180deg); }
+
+/* ── Buttons — tactile lift ── */
+.btn {
+  transition:
+    background var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0) scale(0.99); }
+.btn--primary:hover { box-shadow: 0 6px 18px -6px rgba(21, 94, 239, 0.5), var(--shadow-brand); }
+
+/* ── Product tiles & broker logos — icon nudge on hover ── */
+.pf-tile-ico svg { transition: transform var(--dur-base) var(--ease-out); }
+.pf-tile:hover .pf-tile-ico svg { transform: translateY(-2px) scale(1.08); }
+.corretoras__logo { transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.corretoras__item:hover .corretoras__logo { transform: translateY(-2px) scale(1.07); }
+
+/* ── Testimonial cards — slight lift with the shadow ── */
+.testi__card {
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+.testi__card:hover { transform: translateY(-2px); }
+
+/* ── Contador chat — message pops in, thinking fades, answer staggers ── */
+@keyframes skMsgIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes skFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes skItemIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+/* entrance starts when the block scrolls into view (.sk-live added by JS) */
+body[data-illo-anim="on"] .sk-win.sk-live[data-phase="think"] .sk-msg--user { animation: skMsgIn 0.55s var(--ease-out) both; }
+body[data-illo-anim="on"] .sk-win.sk-live[data-phase="think"] .sk-thinking { animation: skFadeIn 0.4s var(--ease-out) 0.55s both; }
+body[data-illo-anim="on"] .sk-win:not(.sk-live)[data-phase="think"] .sk-msg--user,
+body[data-illo-anim="on"] .sk-win:not(.sk-live)[data-phase="think"] .sk-thinking { opacity: 0; }
+body[data-illo-anim="on"] .sk-win[data-phase="answer"] .sk-answer > * { animation: skItemIn 0.5s var(--ease-out) both; }
+body[data-illo-anim="on"] .sk-win[data-phase="answer"] .sk-answer > :nth-child(1) { animation-delay: 0s; }
+body[data-illo-anim="on"] .sk-win[data-phase="answer"] .sk-answer > :nth-child(2) { animation-delay: 0.1s; }
+body[data-illo-anim="on"] .sk-win[data-phase="answer"] .sk-answer > :nth-child(3) { animation-delay: 0.22s; }
+body[data-illo-anim="on"] .sk-win[data-phase="answer"] .sk-answer > :nth-child(4) { animation-delay: 0.34s; }
+body[data-illo-anim="on"] .sk-win[data-phase="answer"] .sk-answer > :nth-child(5) { animation-delay: 0.46s; }
+body[data-illo-anim="on"] .sk-win[data-phase="answer"] .sk-answer > :nth-child(6) { animation-delay: 0.58s; }
+body[data-illo-anim="on"] .sk-win[data-phase="answer"] .sk-answer > :nth-child(7) { animation-delay: 0.7s; }
+
+/* suggestions panel — the highlight cycles through the questions */
+:root { --sug-hi: var(--blue-50); }
+[data-theme="dark"] { --sug-hi: rgba(107, 157, 255, 0.14); }
+body[data-illo-anim="on"] .sk-suggest__item { animation: skSugHi 6.3s var(--ease-in-out) infinite; }
+body[data-illo-anim="on"] .sk-suggest__item:nth-of-type(2) { animation-delay: 2.1s; }
+body[data-illo-anim="on"] .sk-suggest__item:nth-of-type(3) { animation-delay: 4.2s; }
+@keyframes skSugHi {
+  0%, 28%   { background: var(--sug-hi); }
+  33%, 100% { background: transparent; }
+}
+
+/* "Contador S" shortcut chip — soft glow ping */
+body[data-illo-anim="on"] .sk-kbd--accent { animation: skKbdGlow 3s var(--ease-in-out) infinite; }
+@keyframes skKbdGlow {
+  0%, 100% { box-shadow: var(--shadow-sm); }
+  50%      { box-shadow: 0 0 0 5px rgba(21, 94, 239, 0.12), var(--shadow-sm); }
+}
+
+/* ── WhatsApp FAB — gentle ping ring ── */
+.fab-whats { position: fixed; }
+body[data-illo-anim="on"] .fab-whats::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: fabPing 3.4s var(--ease-out) infinite;
+  pointer-events: none;
+}
+@keyframes fabPing {
+  0%        { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+  60%, 100% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+}
+
+/* ── Funcionalidades · living illustrations ───────────────
+   Dashed connectors FLOW toward their destination, the travelling
+   pulse glows and "delivers" — the destination pops in sync. Each
+   illustration adds its own idle life: CPU heartbeat, shimmering
+   note lines, equalizer bars. The three columns run out of phase
+   so the pulses don't march in lockstep. */
+
+/* dashes flow along every dashed connector (period 4+5 = 9) */
+body[data-illo-anim="on"] .illo [stroke-dasharray] { animation: illoDash 1.4s linear infinite; }
+@keyframes illoDash { to { stroke-dashoffset: -18; } }
+
+/* glowing comet head, breathing as it travels */
+.illo-pulse { filter: drop-shadow(0 0 5px var(--illo-accent)); }
+@keyframes illoMove {
+  0%   { offset-distance: 0%;   opacity: 0; transform: scale(0.6); }
+  10%  { opacity: 1; transform: scale(1); }
+  50%  { transform: scale(1.25); }
+  88%  { opacity: 1; transform: scale(1); }
+  100% { offset-distance: 100%; opacity: 0; transform: scale(0.6); }
+}
+
+/* destination "receives" the pulse — pop timed to its arrival (same 3.4s cycle) */
+.illo .illo-pop { transform-box: fill-box; transform-origin: center; }
+body[data-illo-anim="on"] .illo .illo-pop { animation: illoPop 3.4s var(--ease-in-out) infinite; }
+@keyframes illoPop {
+  0%, 84% { transform: scale(1); }
+  90%     { transform: scale(1.14); }
+  95%     { transform: scale(0.99); }
+  100%    { transform: scale(1); }
+}
+
+/* CPU core heartbeat */
+.illo .illo-heart { transform-box: fill-box; transform-origin: center; }
+body[data-illo-anim="on"] .illo .illo-heart { animation: illoHeart 1.7s var(--ease-in-out) infinite; }
+@keyframes illoHeart {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.12); }
+}
+
+/* note lines shimmer while being "read" */
+body[data-illo-anim="on"] .illo .illo-shim { animation: illoShim 2.1s var(--ease-in-out) infinite; }
+@keyframes illoShim {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
+
+/* extra fill utility for muted dots */
+.illo .f-soft { fill: var(--illo-line-soft); }
+
+/* satellite dot riding the orbit ellipse */
+body[data-illo-anim="on"] .illo .illo-orbit { animation: illoOrbit 8s linear infinite; }
+@keyframes illoOrbit { to { offset-distance: 100%; } }
+
+/* expanding city pings on the globe */
+.illo .illo-ping { transform-box: fill-box; transform-origin: center; opacity: 0.5; }
+body[data-illo-anim="on"] .illo .illo-ping { animation: illoPing 2.6s var(--ease-out) infinite backwards; }
+@keyframes illoPing {
+  0%        { transform: scale(0.35); opacity: 0.9; }
+  70%, 100% { transform: scale(1.9);  opacity: 0; }
+}
+
+/* spinning dashed processing ring */
+.illo .illo-spin { transform-box: fill-box; transform-origin: center; }
+body[data-illo-anim="on"] .illo .illo-spin { animation: illoSpin 9s linear infinite; }
+@keyframes illoSpin { to { transform: rotate(360deg); } }
+
+/* floating KPI chip */
+.illo .illo-float { transform-box: fill-box; transform-origin: center; }
+body[data-illo-anim="on"] .illo .illo-float { animation: illoFloat 4.5s var(--ease-in-out) infinite; }
+@keyframes illoFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+/* trend line draws itself, the area fades in under it, the dot lands */
+.illo .illo-draw { stroke-dasharray: 100; stroke-dashoffset: 0; }
+body[data-illo-anim="on"] .illo .illo-draw { animation: illoDraw 3.4s var(--ease-in-out) infinite; }
+@keyframes illoDraw {
+  0%   { stroke-dashoffset: 100; opacity: 1; }
+  55%  { stroke-dashoffset: 0; }
+  92%  { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+body[data-illo-anim="on"] .illo .illo-area { animation: illoArea 3.4s var(--ease-in-out) infinite; }
+@keyframes illoArea {
+  0%, 20% { opacity: 0; }
+  60%     { opacity: 1; }
+  92%     { opacity: 1; }
+  100%    { opacity: 0; }
+}
+.illo .illo-dot { transform-box: fill-box; transform-origin: center; }
+body[data-illo-anim="on"] .illo .illo-dot { animation: illoDot 3.4s var(--ease-in-out) infinite; }
+@keyframes illoDot {
+  0%, 52% { opacity: 0; transform: scale(0.3); }
+  58%     { opacity: 1; transform: scale(1.35); }
+  64%     { transform: scale(1); }
+  92%     { opacity: 1; transform: scale(1); }
+  100%    { opacity: 0; transform: scale(0.3); }
+}
+
+/* run the three columns out of phase (3.4s ÷ 3) */
+.cf-grid__col:nth-child(2) .illo .illo-pulse,
+.cf-grid__col:nth-child(2) .illo .illo-pop { animation-delay: 1.15s; }
+.cf-grid__col:nth-child(3) .illo .illo-draw,
+.cf-grid__col:nth-child(3) .illo .illo-area,
+.cf-grid__col:nth-child(3) .illo .illo-dot { animation-delay: 2.3s; }
+
+/* ── Reduced motion — kill choreography, show everything ── */
+@media (prefers-reduced-motion: reduce) {
+  .hero__centered-inner > *,
+  .hero__shot-wrap,
+  .corretoras--on-brand,
+  .sk-msg--user,
+  .sk-thinking,
+  .sk-answer > *,
+  .sk-suggest__item,
+  .sk-kbd--accent,
+  .illo [stroke-dasharray],
+  .illo .illo-pop,
+  .illo .illo-heart,
+  .illo .illo-shim,
+  .illo .illo-orbit,
+  .illo .illo-ping,
+  .illo .illo-spin,
+  .illo .illo-float,
+  .illo .illo-draw,
+  .illo .illo-area,
+  .illo .illo-dot,
+  .fab-whats::before { animation: none !important; }
+  .rv { opacity: 1; transform: none; }
+}
+
 
 /* ═══════════════════════════════════════════════════════════════
    PRODUCT PAGE TEMPLATE (Linear /build-inspired) — from product.css
@@ -3344,4 +3658,299 @@ body[data-illo-anim="on"] .bz-dot { animation: bzpulse 1.8s ease-in-out infinite
 
 @media (prefers-reduced-motion: reduce) {
   .bz-edge, .bz-dot { animation: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   FEATURES v2 — goldsand-style soft canvases with live UI mockups
+   (home only; /assessores keeps the legacy .cf-grid triptych)
+   ══════════════════════════════════════════════════════════════════ */
+.section--featv2 { background: var(--bg-surface); position: relative; overflow: hidden; }
+[data-theme="dark"] .section--featv2 { background: var(--ink-900); }
+[data-theme="dark"] .section--featv2 .sec-head h2 { color: #fff; }
+[data-theme="dark"] .section--featv2 .sec-head p { color: var(--ink-fg-muted); }
+
+.gsf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 28px;
+  /* component palette (light default) */
+  --gsf-bg:        #F2F4F8;
+  --gsf-surface:   #FFFFFF;
+  --gsf-ink:       var(--sencon-ink);
+  --gsf-muted:     var(--gray-500);
+  --gsf-soft:      var(--gray-100);
+  --gsf-line:      var(--gray-200);
+  --gsf-accent:    var(--sencon-blue);
+  --gsf-green-bg:  var(--success-100);
+  --gsf-green-fg:  var(--success-700);
+  --gsf-shadow:    0 28px 60px -22px rgba(16,24,40,0.20);
+  --gsf-halo:      0 0 60px 8px rgba(125,140,165,0.14), 0 40px 80px -40px rgba(16,24,40,0.16);
+  --gsf-globe-dot: rgba(21,94,239,0.42);
+  --gsf-globe-rim: rgba(21,94,239,0.16);
+}
+[data-theme="dark"] .gsf-grid {
+  --gsf-bg:        #0F1D3A;
+  --gsf-surface:   #16264A;
+  --gsf-ink:       #FFFFFF;
+  --gsf-muted:     var(--ink-fg-muted);
+  --gsf-soft:      rgba(255,255,255,0.07);
+  --gsf-line:      rgba(255,255,255,0.10);
+  --gsf-accent:    #6B9DFF;
+  --gsf-green-bg:  rgba(78,217,154,0.15);
+  --gsf-green-fg:  #4ED99A;
+  --gsf-shadow:    0 28px 60px -22px rgba(0,0,0,0.55);
+  --gsf-halo:      0 40px 80px -40px rgba(0,0,0,0.6);
+  --gsf-globe-dot: rgba(107,157,255,0.50);
+  --gsf-globe-rim: rgba(107,157,255,0.18);
+}
+
+.gsf-feat { display: flex; flex-direction: column; min-width: 0; }
+.gsf-feat h4 {
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: -0.015em;
+  color: var(--gsf-ink);
+  margin: 0 0 8px;
+}
+.gsf-feat p { font-size: 14.5px; line-height: 1.6; color: var(--fg-muted); margin: 0; max-width: 52ch; text-wrap: pretty; }
+[data-theme="dark"] .gsf-feat p { color: var(--ink-fg-muted); }
+
+/* the soft rounded stage every mockup lives on */
+.gsf-canvas {
+  position: relative;
+  background: var(--gsf-bg);
+  border-radius: 30px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 22px;
+  box-shadow: var(--gsf-halo);
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
+}
+[data-theme="dark"] .gsf-canvas { border: 1px solid rgba(255,255,255,0.06); }
+.gsf-feat:hover .gsf-canvas { transform: translateY(-4px); }
+.gsf-canvas--free { justify-content: center; gap: 18px; }
+
+/* ── mockup 1 · dotted globe + travelling US$→R$ arc ── */
+.gsf-canvas--globe { background: linear-gradient(180deg, #F8FBFF 0%, #E5EEFD 100%); }
+[data-theme="dark"] .gsf-canvas--globe { background: linear-gradient(180deg, #0E1C38 0%, #14254B 100%); }
+.gsf-globe { position: absolute; inset: 0; width: 100%; height: 100%; }
+.gsf-globe__rim { stroke: var(--gsf-globe-rim); stroke-width: 1; }
+.gsf-globe__dots { stroke: var(--gsf-globe-dot); stroke-width: 2.6; stroke-linecap: round; }
+.gsf-globe__arc { stroke: var(--gsf-accent); stroke-width: 1.5; stroke-dasharray: 4 5; opacity: 0.9; }
+.gsf-globe__comet { fill: var(--gsf-accent); filter: drop-shadow(0 0 5px var(--gsf-accent)); offset-distance: 0%; offset-rotate: 0deg; opacity: 0; }
+.gsf-globe__end { fill: var(--gsf-accent); }
+.gsf-globe__end--dst { fill: var(--gsf-green-fg); }
+.gsf-globe__ping { stroke: var(--gsf-accent); stroke-width: 1.5; fill: none; transform-box: fill-box; transform-origin: center; opacity: 0; }
+.gsf-globe__ping--dst { stroke: var(--gsf-green-fg); }
+
+.gsf-fxbar { position: relative; z-index: 1; text-align: center; margin-top: 40px; }
+.gsf-fx__route { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.gsf-fx__arrow { width: 18px; height: 11px; color: var(--gsf-muted); flex-shrink: 0; }
+.gsf-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--gsf-surface);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12.5px; font-weight: 600;
+  color: var(--gsf-muted);
+  white-space: nowrap;
+  box-shadow: 0 6px 18px -8px rgba(16,24,40,0.18);
+}
+[data-theme="dark"] .gsf-chip { box-shadow: 0 6px 18px -8px rgba(0,0,0,0.5); }
+.gsf-chip--brl { color: var(--gsf-ink); }
+.gsf-chip--brl b { font-weight: 700; font-variant-numeric: tabular-nums; }
+.gsf-fxsub { margin-top: 12px; font-size: 11.5px; color: var(--gsf-muted); }
+
+/* ── mockup 2 · resolved steps + DARF pill ── */
+.gsf-tasks { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.gsf-task {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gsf-surface);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12.5px; font-weight: 600;
+  color: var(--gsf-muted);
+  box-shadow: 0 6px 18px -8px rgba(16,24,40,0.16);
+}
+[data-theme="dark"] .gsf-task { box-shadow: 0 6px 18px -8px rgba(0,0,0,0.5); }
+.gsf-task__check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--gsf-green-bg);
+  color: var(--gsf-green-fg);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.gsf-task__check svg { width: 10px; height: 10px; }
+.gsf-pill {
+  background: var(--gsf-green-bg);
+  color: var(--gsf-green-fg);
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(16px, 1.5vw, 19px);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* ── mockup 3 · dashboard card with self-drawing chart ── */
+.gsf-dash {
+  width: 86%;
+  margin-top: 38px;
+  margin-bottom: -28px; /* bleed past the bottom edge */
+  flex: 1;
+  background: var(--gsf-surface);
+  border-radius: 20px 20px 0 0;
+  box-shadow: var(--gsf-shadow);
+  padding: 18px 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+.gsf-dash__bar { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.gsf-dash__t { font-family: var(--font-text); font-weight: 600; font-size: 13.5px; color: var(--gsf-ink); letter-spacing: -0.01em; }
+.gsf-dash__d { font-size: 11px; color: var(--gsf-muted); margin-top: 2px; }
+.gsf-kpi {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--gsf-green-bg);
+  color: var(--gsf-green-fg);
+  border-radius: 999px;
+  padding: 6px 11px;
+  font-size: 12px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.gsf-kpi svg { width: 10px; height: 10px; }
+.gsf-dash__chart { margin-top: 16px; flex: 1; }
+.gsf-dash__chart svg { width: 100%; height: auto; display: block; }
+.gsf-hair { stroke: var(--gsf-line); stroke-width: 1; stroke-dasharray: 2 7; }
+.gsf-line { stroke: var(--gsf-accent); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.gsf-dot { fill: var(--gsf-green-fg); }
+.gsf-ring { stroke: var(--gsf-green-fg); stroke-width: 1.5; fill: none; transform-box: fill-box; transform-origin: center; opacity: 0; }
+.gsf-months { display: flex; justify-content: space-between; padding: 10px 4px 20px; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; color: var(--gsf-muted); }
+
+/* ── entrance choreography ──────────────────────────────────
+   Hidden states + animations only apply when JS is running
+   (body[data-illo-anim]) and motion is allowed, so no-JS and
+   reduced-motion users always get the finished composition. */
+@media (prefers-reduced-motion: no-preference) {
+  body[data-illo-anim="on"] .gsf-feat {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  }
+  body[data-illo-anim="on"] .gsf-feat:nth-child(2) { transition-delay: 0.1s; }
+  body[data-illo-anim="on"] .gsf-feat:nth-child(3) { transition-delay: 0.2s; }
+  body[data-illo-anim="on"] .gsf-feat.is-in { opacity: 1; transform: none; }
+
+  /* card 1 — globe rises, chips pop, count-up runs (JS), comet loops the arc */
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-globe,
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-chip,
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-fx__arrow,
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-globe__arc,
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-globe__end,
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-fxsub { opacity: 0; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-globe { animation: gsfGlobeIn 1.1s var(--ease-out) 0.05s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-chip { animation: gsfPop 0.5s var(--ease-out) both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-chip:last-child { animation-delay: 0.62s; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-chip:first-child { animation-delay: 0.48s; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-fx__arrow { animation: gsfFade 0.5s var(--ease-out) 0.56s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-fxsub { animation: gsfFade 0.55s var(--ease-out) 0.85s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-globe__arc {
+    animation:
+      gsfFade 0.7s var(--ease-out) 0.7s both,
+      gsfDashFlow 1.1s linear 0.7s infinite;
+  }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-globe__end { animation: gsfPop 0.4s var(--ease-out) 0.8s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-globe__comet { animation: gsfTravel 3.4s var(--ease-in-out) 1s infinite; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-globe__ping { animation: gsfPing 3.4s var(--ease-out) 1.1s infinite; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-globe__ping--dst { animation-delay: 3.8s; }
+
+  /* card 2 — steps slide in, pill springs then floats */
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-task,
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-pill { opacity: 0; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-task:nth-child(1) { animation: gsfUp 0.55s var(--ease-out) 0.15s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-task:nth-child(2) { animation: gsfUp 0.55s var(--ease-out) 0.34s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-pill {
+    animation:
+      gsfSpring 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.58s both,
+      gsfFloat 5.5s var(--ease-in-out) 1.5s infinite;
+  }
+
+  /* card 3 — dash rises, line draws, area fills, dot lands, KPI springs */
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-dash { opacity: 0; }
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-line { stroke-dasharray: 100; stroke-dashoffset: 100; }
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-area,
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-dot,
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-kpi,
+  body[data-illo-anim="on"] .gsf-feat:not(.is-in) .gsf-months { opacity: 0; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-dash { animation: gsfRise 0.9s var(--ease-out) 0.1s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-line { stroke-dasharray: 100; animation: gsfDraw 1.6s var(--ease-in-out) 0.5s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-area { animation: gsfFade 1s var(--ease-out) 1.2s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-dot { transform-box: fill-box; transform-origin: center; animation: gsfSpring 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.95s both; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-ring { animation: gsfPing 3s var(--ease-out) 2.4s infinite; }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-kpi {
+    animation:
+      gsfSpring 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.8s both,
+      gsfFloat 5s var(--ease-in-out) 2.6s infinite;
+  }
+  body[data-illo-anim="on"] .gsf-feat.is-in .gsf-months { animation: gsfFade 0.7s var(--ease-out) 1.1s both; }
+}
+
+@keyframes gsfRise {
+  from { opacity: 0; transform: translateY(56px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes gsfGlobeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes gsfDashFlow {
+  to { stroke-dashoffset: -18; }
+}
+@keyframes gsfTravel {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  12%  { opacity: 1; }
+  82%  { opacity: 1; }
+  96%, 100% { offset-distance: 100%; opacity: 0; }
+}
+@keyframes gsfUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes gsfPop {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes gsfFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes gsfSpring {
+  from { opacity: 0; transform: scale(0.55); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes gsfFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+@keyframes gsfDraw {
+  from { stroke-dashoffset: 100; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes gsfPing {
+  0%   { opacity: 0.7; transform: scale(1); }
+  55%  { opacity: 0; transform: scale(2.6); }
+  100% { opacity: 0; transform: scale(2.6); }
+}
+
+/* ── responsive ── */
+@media (max-width: 880px) {
+  .gsf-grid { grid-template-columns: 1fr; gap: 48px; }
+  .gsf-canvas { height: 330px; }
+  .gsf-dash { width: 86%; max-width: 380px; }
+  .gsf-pill { white-space: normal; text-align: center; }
 }
