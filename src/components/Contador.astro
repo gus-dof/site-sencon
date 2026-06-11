@@ -98,7 +98,7 @@
         const vh = window.innerHeight || document.documentElement.clientHeight
         if (r.top < vh * 0.8 && r.bottom > vh * 0.2) {
           started = true
-          win.setAttribute('data-phase', 'think')
+          win.classList.add('sk-live') // starts the message/thinking entrance now
           timer = setTimeout(() => win.setAttribute('data-phase', 'answer'), 2600)
           window.removeEventListener('scroll', check)
         }

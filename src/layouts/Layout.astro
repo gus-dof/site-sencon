@@ -39,5 +39,68 @@ const {
       })()
     </script>
     <slot />
+
+    <!-- Scroll-reveal: sections/cards rise in as they enter the viewport,
+         staggered per container. Skipped entirely under reduced motion;
+         the .rv classes are removed after the reveal so hover transitions
+         defined elsewhere regain full control of the element. -->
+    <script>
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (!reduced && 'IntersectionObserver' in window) {
+        const SELECTORS = [
+          '.sec-head',
+          '.pf-col',
+          '.fnode',
+          '.frail',
+          '.flow-step',
+          '.steps-cta',
+          '.cf-grid__col',
+          '.sk-hero__demo',
+          '.sk-hero__copy',
+          '.sk-feat',
+          '.testi-summary',
+          '.testi__card',
+          '.numbers__cell',
+          '.finalcta',
+          '.plan',
+          '.plan-extras',
+          '.faq__item',
+          '.adv-note',
+        ]
+        const els: HTMLElement[] = []
+        for (const sel of SELECTORS) document.querySelectorAll<HTMLElement>(sel).forEach((el) => els.push(el))
+
+        // stagger index = position among revealed siblings in the same parent
+        const idx = new Map<HTMLElement, number>()
+        const counts = new Map<Element, number>()
+        for (const el of els) {
+          const p = el.parentElement ?? document.body
+          const n = counts.get(p) ?? 0
+          idx.set(el, n)
+          counts.set(p, n + 1)
+          el.classList.add('rv')
+        }
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (!e.isIntersecting) continue
+              const el = e.target as HTMLElement
+              io.unobserve(el)
+              const delay = Math.min((idx.get(el) ?? 0) * 90, 540)
+              el.style.transitionDelay = `${delay}ms`
+              requestAnimationFrame(() => el.classList.add('rv--in'))
+              // hand the element back to its own hover transitions
+              setTimeout(() => {
+                el.style.transitionDelay = ''
+                el.classList.remove('rv', 'rv--in')
+              }, delay + 800)
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
+        )
+        els.forEach((el) => io.observe(el))
+      }
+    </script>
   </body>
 </html>

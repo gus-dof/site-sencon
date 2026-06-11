@@ -1,6 +1,8 @@
 ---
+import { GLOBE_DOTS } from './globe-dots'
+const ARC = 'M86 272 C130 196 215 200 259 278'
 ---
-<section class="section section--dark section--features">
+<section class="section section--featv2">
   <div class="container">
     <div class="sec-head">
       <span class="eyebrow">Funcionalidades</span>
@@ -8,81 +10,131 @@
       <p>Do investidor casual ao trader ativo — tudo o que você precisa em um só lugar.</p>
     </div>
 
-    <div class="cf-grid">
-      <!-- IR para Exterior -->
-      <div class="cf-grid__col">
-        <div class="cf-grid__illo">
-          <svg class="illo" viewBox="0 0 300 184" fill="none" aria-hidden="true">
-            <circle class="s-soft" cx="104" cy="108" r="58" stroke-width="1.5" />
-            <ellipse class="s-soft" cx="104" cy="108" rx="24" ry="58" stroke-width="1.5" />
-            <line class="s-soft" x1="46" y1="108" x2="162" y2="108" stroke-width="1.5" />
-            <path class="s-soft" d="M53 80 Q104 62 155 80" stroke-width="1.5" />
-            <path class="s-soft" d="M53 136 Q104 154 155 136" stroke-width="1.5" />
-            <rect class="f-chip s-line" x="40" y="18" width="56" height="30" rx="8" stroke-width="1.25" />
-            <text class="f-chipfg illo-t" x="68" y="38" text-anchor="middle" font-size="14" font-weight="700">US$</text>
-            <rect class="f-chip s-acc" x="208" y="48" width="56" height="30" rx="8" stroke-width="1.5" />
-            <text class="f-acc illo-t" x="236" y="68" text-anchor="middle" font-size="14" font-weight="700">R$</text>
-            <path class="s-acc" d="M96 33 C150 5 210 18 236 47" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.85" />
-            <circle class="illo-pulse f-acc" r="4" style="offset-path: path('M96 33 C150 5 210 18 236 47');" />
-            <circle class="f-acc" cx="236" cy="47" r="2.5" />
+    <div class="gsf-grid">
+      <!-- 1 · IR para Exterior — dotted globe, NY → Lisboa arc, US$ → R$ conversion -->
+      <article class="gsf-feat">
+        <div class="gsf-canvas gsf-canvas--globe">
+          <div class="gsf-fxbar">
+            <div class="gsf-fx__route">
+              <span class="gsf-chip">🇺🇸 US$ 1.000</span>
+              <svg class="gsf-fx__arrow" viewBox="0 0 20 12" fill="none" aria-hidden="true"><path d="M1 6h16m0 0-4.5-4.5M17 6l-4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="gsf-chip gsf-chip--brl">🇧🇷 R$ <b data-gsf-count="5247">5.247</b></span>
+            </div>
+            <div class="gsf-fxsub">convertido pelo câmbio PTAX do dia</div>
+          </div>
+          <svg class="gsf-globe" viewBox="0 0 340 300" fill="none" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+            <circle class="gsf-globe__rim" cx="170" cy="330" r="210" />
+            <path class="gsf-globe__dots" d={GLOBE_DOTS} />
+            <path class="gsf-globe__arc" d={ARC} />
+            <circle class="gsf-globe__comet" r="3.5" style={`offset-path: path('${ARC}');`} />
+            <circle class="gsf-globe__end" cx="86" cy="272" r="3.5" />
+            <circle class="gsf-globe__end gsf-globe__end--dst" cx="259" cy="279" r="3.5" />
+            <circle class="gsf-globe__ping" cx="86" cy="272" r="8" />
+            <circle class="gsf-globe__ping gsf-globe__ping--dst" cx="259" cy="279" r="8" />
           </svg>
         </div>
-        <div class="cf-grid__text">
-          <h4>IR para Exterior</h4>
-          <p>Cálculo do imposto sobre investimentos fora do Brasil, com conversão de câmbio PTAX e suporte às principais corretoras internacionais.</p>
-        </div>
-      </div>
+        <h4>IR para Exterior</h4>
+        <p>Cálculo do imposto sobre investimentos fora do Brasil, com conversão de câmbio PTAX e suporte às principais corretoras internacionais.</p>
+      </article>
 
-      <!-- Cálculo 100% automático -->
-      <div class="cf-grid__col">
-        <div class="cf-grid__illo">
-          <svg class="illo" viewBox="0 0 300 184" fill="none" aria-hidden="true">
-            <line class="s-soft" x1="26" y1="78" x2="74" y2="78" stroke-width="3" stroke-linecap="round" />
-            <line class="s-soft" x1="26" y1="92" x2="64" y2="92" stroke-width="3" stroke-linecap="round" />
-            <line class="s-soft" x1="26" y1="106" x2="74" y2="106" stroke-width="3" stroke-linecap="round" />
-            <path class="s-acc" d="M82 92 L116 92" stroke-width="1.5" stroke-dasharray="4 5" />
-            <circle class="illo-pulse f-acc" r="3.5" style="offset-path: path('M82 92 L116 92');" />
-            <rect class="f-chip s-line" x="120" y="58" width="68" height="68" rx="12" stroke-width="1.5" />
-            <rect class="s-acc" x="138" y="76" width="32" height="32" rx="6" stroke-width="1.5" />
-            <g><line class="s-line" x1="112" y1="68" x2="120" y2="68" stroke-width="1.5" /><line class="s-line" x1="188" y1="68" x2="196" y2="68" stroke-width="1.5" /></g>
-            <g><line class="s-line" x1="112" y1="92" x2="120" y2="92" stroke-width="1.5" /><line class="s-line" x1="188" y1="92" x2="196" y2="92" stroke-width="1.5" /></g>
-            <g><line class="s-line" x1="112" y1="116" x2="120" y2="116" stroke-width="1.5" /><line class="s-line" x1="188" y1="116" x2="196" y2="116" stroke-width="1.5" /></g>
-            <g><line class="s-line" x1="140" y1="50" x2="140" y2="58" stroke-width="1.5" /><line class="s-line" x1="140" y1="126" x2="140" y2="134" stroke-width="1.5" /></g>
-            <g><line class="s-line" x1="154" y1="50" x2="154" y2="58" stroke-width="1.5" /><line class="s-line" x1="154" y1="126" x2="154" y2="134" stroke-width="1.5" /></g>
-            <g><line class="s-line" x1="168" y1="50" x2="168" y2="58" stroke-width="1.5" /><line class="s-line" x1="168" y1="126" x2="168" y2="134" stroke-width="1.5" /></g>
-            <path class="s-grn" d="M192 92 L226 92" stroke-width="1.5" stroke-dasharray="4 5" />
-            <circle class="f-grntint s-grn" cx="248" cy="92" r="18" stroke-width="1.5" />
-            <path class="s-grn" d="M240 92 l5 6 9 -11" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
+      <!-- 2 · Cálculo 100% automático — steps resolve, DARF pill pops -->
+      <article class="gsf-feat">
+        <div class="gsf-canvas gsf-canvas--free">
+          <div class="gsf-tasks" aria-hidden="true">
+            <span class="gsf-task">
+              <i class="gsf-task__check"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5 5 9l4.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+              12 notas importadas
+            </span>
+            <span class="gsf-task">
+              <i class="gsf-task__check"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5 5 9l4.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+              Imposto apurado
+            </span>
+          </div>
+          <div class="gsf-pill">DARF pronta · R$ 432,10</div>
         </div>
-        <div class="cf-grid__text">
-          <h4>Cálculo 100% automático</h4>
-          <p>Esqueça as planilhas. Aqui na Sencon o cálculo do imposto é totalmente automatizado, importado e apurado mês a mês.</p>
-        </div>
-      </div>
+        <h4>Cálculo 100% automático</h4>
+        <p>Esqueça as planilhas. Aqui na Sencon o cálculo do imposto é totalmente automatizado, importado e apurado mês a mês.</p>
+      </article>
 
-      <!-- Relatórios de resultados -->
-      <div class="cf-grid__col">
-        <div class="cf-grid__illo">
-          <svg class="illo" viewBox="0 0 300 184" fill="none" aria-hidden="true">
-            <rect class="f-chip s-soft" x="44" y="26" width="212" height="132" rx="12" stroke-width="1.5" />
-            <line class="s-line" x1="66" y1="120" x2="66" y2="100" stroke-width="8" stroke-linecap="round" />
-            <line class="s-line" x1="92" y1="120" x2="92" y2="86" stroke-width="8" stroke-linecap="round" />
-            <line class="s-line" x1="118" y1="120" x2="118" y2="94" stroke-width="8" stroke-linecap="round" />
-            <line class="s-acc" x1="144" y1="120" x2="144" y2="66" stroke-width="8" stroke-linecap="round" />
-            <path class="s-acc" d="M64 96 L90 82 L116 90 L144 58 L196 48" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.9" />
-            <circle class="illo-pulse f-acc" r="3.5" style="offset-path: path('M64 96 L90 82 L116 90 L144 58 L196 48');" />
-            <circle class="f-grn" cx="196" cy="48" r="4" />
-            <line class="s-soft" x1="178" y1="100" x2="236" y2="100" stroke-width="3" stroke-linecap="round" />
-            <line class="s-soft" x1="178" y1="114" x2="222" y2="114" stroke-width="3" stroke-linecap="round" />
-            <line class="s-soft" x1="178" y1="128" x2="232" y2="128" stroke-width="3" stroke-linecap="round" />
-          </svg>
+      <!-- 3 · Relatórios — dashboard card, self-drawing chart + KPI -->
+      <article class="gsf-feat">
+        <div class="gsf-canvas gsf-canvas--dash">
+          <div class="gsf-dash">
+            <div class="gsf-dash__bar">
+              <div>
+                <div class="gsf-dash__t">Evolução da carteira</div>
+                <div class="gsf-dash__d">Lucro acumulado · 2026</div>
+              </div>
+              <span class="gsf-kpi">
+                <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5m0 0H4.2m5.3 0v5.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                +24,8%
+              </span>
+            </div>
+            <div class="gsf-dash__chart">
+              <svg viewBox="0 0 640 210" fill="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="gsfAreaG" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" style="stop-color: var(--gsf-accent);" stop-opacity="0.20" />
+                    <stop offset="1" style="stop-color: var(--gsf-accent);" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <path class="gsf-hair" d="M18 58 H622" />
+                <path class="gsf-hair" d="M18 110 H622" />
+                <path class="gsf-hair" d="M18 162 H622" />
+                <path class="gsf-area" d="M18 166 C80 152 110 158 150 142 C190 126 214 136 252 120 C290 104 318 114 356 94 C394 74 422 86 460 66 C498 46 560 52 622 32 L622 200 L18 200 Z" fill="url(#gsfAreaG)" />
+                <path class="gsf-line" d="M18 166 C80 152 110 158 150 142 C190 126 214 136 252 120 C290 104 318 114 356 94 C394 74 422 86 460 66 C498 46 560 52 622 32" pathLength="100" />
+                <circle class="gsf-ring" cx="622" cy="32" r="6" />
+                <circle class="gsf-dot" cx="622" cy="32" r="5" />
+              </svg>
+              <div class="gsf-months" aria-hidden="true">
+                <span>Jan</span><span>Mar</span><span>Mai</span><span>Jul</span><span>Set</span><span>Nov</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="cf-grid__text">
-          <h4>Relatórios de resultados</h4>
-          <p>Acompanhe lucro, prejuízo e DARFs emitidos em relatórios exclusivos e veja a evolução da sua carteira ao longo do tempo.</p>
-        </div>
-      </div>
+        <h4>Relatórios de resultados</h4>
+        <p>Acompanhe lucro, prejuízo e DARFs emitidos em relatórios exclusivos e veja a evolução da sua carteira ao longo do tempo.</p>
+      </article>
     </div>
   </div>
 </section>
+
+<script>
+  // Choreographs each feature card when it scrolls into view (.is-in) and
+  // runs the R$ count-up. Markup ships with final values, so no-JS and
+  // reduced-motion users always see the finished composition.
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const feats = document.querySelectorAll<HTMLElement>('.gsf-feat')
+  if (feats.length && 'IntersectionObserver' in window) {
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
+    const count = (el: HTMLElement) => {
+      const target = parseInt(el.dataset.gsfCount || '0', 10)
+      const dur = 1500
+      let start: number | null = null
+      const tick = (ts: number) => {
+        if (start === null) start = ts
+        const p = Math.min((ts - start) / dur, 1)
+        el.textContent = Math.round(easeOut(p) * target).toLocaleString('pt-BR')
+        if (p < 1) requestAnimationFrame(tick)
+      }
+      el.textContent = '0'
+      requestAnimationFrame(tick)
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue
+          io.unobserve(e.target)
+          const el = e.target as HTMLElement
+          el.classList.add('is-in')
+          if (!reduced) {
+            // start counting once the phone screen has settled
+            el.querySelectorAll<HTMLElement>('[data-gsf-count]').forEach((n) => setTimeout(() => count(n), 550))
+          }
+        }
+      },
+      { threshold: 0.35, rootMargin: '0px 0px -8% 0px' },
+    )
+    feats.forEach((f) => io.observe(f))
+  }
+</script>
