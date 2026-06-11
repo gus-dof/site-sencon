@@ -314,8 +314,8 @@ button { font-family: inherit; }
 }
 .navbar--scrolled {
   background: rgba(8, 16, 32, 0.72);
-  backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
   border-bottom: 1px solid var(--ink-line);
 }
 .navbar__inner { display: flex; align-items: center; gap: 40px; height: 72px; }
@@ -1073,7 +1073,7 @@ body[data-theme="light"] .hero__centered-title-accent { color: var(--sencon-blue
 body[data-theme="light"] { background: #fff; }
 
 body[data-theme="light"] .navbar { background: var(--blue-50); border-bottom: 1px solid transparent; color: var(--fg-default); }
-body[data-theme="light"] .navbar--scrolled { background: rgba(255,255,255,0.78); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); border-bottom: 1px solid var(--border-default); }
+body[data-theme="light"] .navbar--scrolled { background: rgba(255,255,255,0.78); -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%); border-bottom: 1px solid var(--border-default); }
 body[data-theme="light"] .navbar__logo .wm { color: var(--sencon-ink); }
 body[data-theme="light"] .navbar__link { color: var(--fg-muted); }
 body[data-theme="light"] .navbar__link:hover { color: var(--sencon-ink); background: var(--gray-50); }
