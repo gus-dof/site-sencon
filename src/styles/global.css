@@ -1020,6 +1020,11 @@ body[data-theme="light"] .hero__centered-title-accent { color: var(--sencon-blue
 .footer__brand .wm { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
 .footer__brand .wm img { height: 36px; }
 .footer__brand .wm span { font-family: var(--font-display); font-weight: 700; font-size: 24px; color: #fff; letter-spacing: -0.02em; }
+/* 16-anos commemorative signature — swap asset by theme */
+.footer__brand .wm--16 img { height: 58px; width: auto; }
+.footer__brand .wm--16-pos { display: none; }
+body[data-theme="light"] .footer__brand .wm--16-neg { display: none; }
+body[data-theme="light"] .footer__brand .wm--16-pos { display: block; }
 .footer__brand p { font-size: 14px; line-height: 1.55; max-width: 32ch; }
 .footer__col h5 { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; margin: 0 0 18px; }
 .footer__col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
