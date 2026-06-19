@@ -4,8 +4,8 @@
   <div class="container">
     <div class="sec-head">
       <span class="eyebrow">Como funciona</span>
-      <h2>Seu Imposto de Renda em 5 minutos.</h2>
-      <p>Do extrato da corretora ao DARF pronto — você faz só 3 passos, a Sencon cuida do resto.</p>
+      <h2>Seu IR fechado em 3 passos.</h2>
+      <p>Você importa as notas. A Sencon calcula e gera o DARF.</p>
     </div>
 
     <div class="flow">
@@ -79,7 +79,7 @@
           <div class="flow-step__num">01</div>
           <div>
             <div class="flow-step__t">Importe suas notas</div>
-            <div class="flow-step__d">Envie suas notas SINACOR (.txt) ou conecte a corretora direto à plataforma.</div>
+            <div class="flow-step__d">Envie suas notas no formato SINACOR ou conecte com a sua corretora direto na plataforma, sem digitar um número sequer.</div>
           </div>
         </div>
         <div class="flow-step">
@@ -93,27 +93,24 @@
           <div class="flow-step__num">03</div>
           <div>
             <div class="flow-step__t">Emita seu DARF</div>
-            <div class="flow-step__d">Clique em <b>"Emitir DARF"</b> — com juros e multa já calculados, se necessário.</div>
+            <div class="flow-step__d">Um clique e o DARF sai pronto, com juros e multa calculados automaticamente quando há atraso.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="steps-cta">
+    <div class="steps-cta steps-cta--premium">
       <div class="steps-cta__txt">
-        <div class="t">Quer que um especialista declare por você?</div>
-        <div class="d">Conheça o Premium: um analista Sencon fecha seus meses e cuida da declaração anual de ponta a ponta.</div>
+        <div class="t">Prefere ter um especialista dedicado a sua conta?</div>
+        <div class="d">No Plano Premium, um analista Sencon busca suas notas, apura o imposto, emite os DARFs mensalmente e faz a declaração anual completa. Você cuida apenas dos investimentos.</div>
       </div>
-      <a href="#" class="btn btn--whatsapp btn--lg" id="steps-premium-whatsapp-btn">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.4 1 2.8 1.2 3c.2.2 2.1 3.2 5.2 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4 0-.2-.3-.3-.6-.5zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-        Seja Premium pelo WhatsApp
-      </a>
+      <a href="#" class="btn btn--lg steps-cta__cta" id="steps-premium-btn">Quero o Plano Premium</a>
     </div>
   </div>
 </section>
 
 <script is:inline>
-  document.getElementById('steps-premium-whatsapp-btn')?.addEventListener('click', function () {
-    window.posthog?.capture('steps_premium_whatsapp_clicked');
+  document.getElementById('steps-premium-btn')?.addEventListener('click', function () {
+    window.posthog?.capture('steps_premium_clicked');
   });
 </script>
