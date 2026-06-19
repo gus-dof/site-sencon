@@ -32,26 +32,26 @@ const brokers = [
   </div>
 
   <!-- Copy -->
-  <div class="container hero__centered-inner">
+  <div class="container hero__centered-inner hero__centered-inner--wide">
     <span class="eyebrow eyebrow--on-brand">+16 anos · pioneira no Brasil</span>
 
-    <h1 class="hero__centered-title" style="font-weight: 700; width: 100%; max-width: 1040px;">
-      Calculadora automática de Imposto<br />
-      de Renda sobre Renda Variável,<br />
-      <span class="hero__centered-title-accent">a primeira do Brasil.</span>
+    <h1 class="hero__centered-title" style="font-weight: 700; width: 100%; max-width: none;">
+      Chega de calcular IR em planilha.<br />
+      Apure, emita o DARF e declare.<br />
+      <span class="hero__centered-title-accent">Tudo automático.</span>
     </h1>
 
     <p class="hero__centered-sub">
-      Mais de 16 anos de precisão e praticidade no cálculo do seu IR, agora com o Contador:
-      o agente de inteligência artificial que responde suas dúvidas e executa tarefas por você.
+      Importe as notas da corretora, confira a custódia e emita o DARF em 3 passos.
+      Tudo isso sem planilha, sem riscos de erros, sem multa.
     </p>
 
     <div class="hero__centered-cta">
-      <a href="#produtos" class="btn btn--primary btn--lg" id="hero-cta-products">
-        Conheça nossos produtos
+      <a href="https://ir.sencon.com.br/login" target="_blank" rel="noopener" class="btn btn--primary btn--lg" id="hero-cta-start">
+        Começar agora
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
-      <a href="#contador" class="btn btn--ghost-dark btn--lg" id="hero-cta-contador">Conheça o Contador</a>
+      <a href="#produtos" class="btn btn--ghost-dark btn--lg" id="hero-cta-buy">Comprar agora</a>
     </div>
 
     <div class="hero__centered-trust">
@@ -71,18 +71,18 @@ const brokers = [
       </div>
       <img
         src="/assets/home-sencon.png"
-        alt="Painel da Sencon — Olá Gustavo, o que vamos fazer hoje?"
+        alt="Painel da Sencon: Olá Gustavo, o que vamos fazer hoje?"
         loading="eager"
       />
     </div>
   </div>
 
 <script is:inline>
-  document.getElementById('hero-cta-products')?.addEventListener('click', function () {
-    window.posthog?.capture('hero_cta_products_clicked');
+  document.getElementById('hero-cta-start')?.addEventListener('click', function () {
+    window.posthog?.capture('hero_cta_start_clicked');
   });
-  document.getElementById('hero-cta-contador')?.addEventListener('click', function () {
-    window.posthog?.capture('hero_cta_contador_clicked');
+  document.getElementById('hero-cta-buy')?.addEventListener('click', function () {
+    window.posthog?.capture('hero_cta_buy_clicked');
   });
 </script>
 

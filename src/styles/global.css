@@ -553,6 +553,7 @@ body[data-theme="light"] .hero__beam { filter: drop-shadow(0 0 5px rgba(21, 94, 
 
 @media (prefers-reduced-motion: reduce) { .hero__beam { animation: none; display: none; } }
 
+.hero__centered-inner.hero__centered-inner--wide { max-width: 1320px; }
 .hero__centered-inner {
   position: relative;
   z-index: 1;
@@ -1540,6 +1541,24 @@ body[data-theme="light"] .cf-grid__text p { color: var(--fg-muted); }
 /* ── Light theme tweaks for new bits ─────────────────────── */
 body[data-theme="light"] .section--numbers { background: var(--gray-25) !important; }
 
+/* ── Light theme — soft alternating section washes (mirrors the dark rhythm) ──
+   Hero(tint) → Numbers(white) → Produtos(wash) → Steps(white) →
+   Funcionalidades(wash) → Contador(white) → Depoimentos(wash) → CTA(white) */
+body[data-theme="light"] { --home-wash: #EEF2FB; }
+body[data-theme="light"] #produtos.section--light { background: var(--home-wash); }
+body[data-theme="light"] .section--featv2 { background: var(--home-wash); }
+/* lift the illustration stages to white so they pop on the washed section */
+body[data-theme="light"] .section--featv2 .gsf-grid { --gsf-bg: #fff; }
+/* Depoimentos em branco (temporariamente, após remover o bloco do Contador) */
+body[data-theme="light"] .section--gray:not(.flowsec) { background: #fff; }
+
+/* Depoimentos — título em uma única linha (no desktop) */
+.sec-head--testi { max-width: none; }
+.sec-head--testi h2 { white-space: nowrap; font-size: clamp(30px, 3.4vw, 50px); }
+@media (max-width: 880px) {
+  .sec-head--testi h2 { white-space: normal; }
+}
+
 /* ───────────────────────────────────────────────────────────────
    Advisors & accountants page (/assessores)
    ─────────────────────────────────────────────────────────────── */
@@ -2351,6 +2370,82 @@ body[data-illo-anim="on"] .illo .illo-dot { animation: illoDot 3.4s var(--ease-i
 .cf-grid__col:nth-child(3) .illo .illo-area,
 .cf-grid__col:nth-child(3) .illo .illo-dot { animation-delay: 2.3s; }
 
+/* ── Premium CTA band — dark, modern gradient border ─────── */
+@property --premium-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.steps-cta--premium {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 22px;
+  padding: 30px 34px;
+  background:
+    radial-gradient(130% 130% at 0% 0%, rgba(21,94,239,0.26), transparent 56%),
+    radial-gradient(120% 150% at 100% 100%, rgba(125,95,255,0.20), transparent 58%),
+    linear-gradient(180deg, #0E1018 0%, #06070B 100%);
+  box-shadow: 0 28px 64px -32px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.06);
+  color: #fff;
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.steps-cta--premium:hover {
+  box-shadow: 0 34px 72px -30px rgba(0,0,0,0.9), 0 0 44px -12px rgba(107,157,255,0.35);
+}
+/* static 1px gradient border */
+.steps-cta--premium::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(107,157,255,0.4) 40%, rgba(255,255,255,0.04) 72%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+/* travelling light that sweeps the border on hover */
+.steps-cta--premium::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--premium-angle),
+    transparent 0deg,
+    transparent 250deg,
+    rgba(140,185,255,0.65) 304deg,
+    #ffffff 330deg,
+    rgba(140,185,255,0.65) 356deg,
+    transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
+  pointer-events: none;
+}
+.steps-cta--premium:hover::after { opacity: 1; animation: premiumSweep 2.4s linear infinite; }
+@keyframes premiumSweep { to { --premium-angle: 360deg; } }
+.steps-cta--premium > * { position: relative; z-index: 1; }
+.steps-cta--premium .steps-cta__txt .t { font-size: 23px; color: #fff; }
+.steps-cta--premium .steps-cta__txt .d { font-size: 14.5px; color: rgba(232,238,248,0.74); opacity: 1; max-width: 64ch; }
+/* premium white CTA — standard button radius */
+.steps-cta__cta {
+  background: #fff;
+  color: #0A0F1C;
+  font-weight: 700;
+  box-shadow: 0 12px 30px -12px rgba(0,0,0,0.6);
+}
+.steps-cta__cta:hover { background: #EEF3FF; transform: translateY(-1px); }
+@media (max-width: 640px) {
+  .steps-cta__cta { width: 100%; }
+}
+
 /* ── Reduced motion — kill choreography, show everything ── */
 @media (prefers-reduced-motion: reduce) {
   .hero__centered-inner > *,
@@ -2372,6 +2467,7 @@ body[data-illo-anim="on"] .illo .illo-dot { animation: illoDot 3.4s var(--ease-i
   .illo .illo-draw,
   .illo .illo-area,
   .illo .illo-dot,
+  .steps-cta--premium::after,
   .fab-whats::before { animation: none !important; }
   .rv { opacity: 1; transform: none; }
 }

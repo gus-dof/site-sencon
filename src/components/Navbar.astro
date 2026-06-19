@@ -6,13 +6,13 @@ const menus = [
       { t: 'IR B3', d: 'Cálculo automático de IR para ações, FIIs, ETFs e day trade na bolsa brasileira.', href: '/ir-b3' },
       { t: 'IR Exterior', d: 'Imposto sobre investimentos no exterior, com câmbio PTAX e Lei 14.754/23.', href: '/ir-exterior' },
       { t: 'Controle de Resultados', d: 'Relatórios de lucro, prejuízo e DARFs emitidos, para acompanhar a evolução da carteira.', href: '#' },
-      { t: 'AI Contador', badge: 'NOVO', d: 'Seu contador com inteligência artificial, que apura impostos e tira dúvidas 24/7.', href: '#contador' },
+      // Temporariamente fora do ar: { t: 'AI Contador', badge: 'NOVO', d: 'Seu contador com inteligência artificial, que apura impostos e tira dúvidas 24/7.', href: '#contador' },
     ],
   },
   {
     label: 'Soluções',
     items: [
-      { t: 'Para investidores', d: 'Cálculo de IR para B3 e Exterior — do investidor casual ao trader ativo.', href: '#' },
+      { t: 'Para investidores', d: 'Cálculo de IR para B3 e Exterior, do investidor casual ao trader ativo.', href: '#' },
       { t: 'Para assessores', d: 'Gerencie o Imposto de Renda de toda a sua carteira de clientes.', href: '/assessores' },
       { t: 'Para contadores', d: 'Relatórios e revisão contábil simplificada para o seu escritório.', href: '/assessores' },
     ],
@@ -24,7 +24,7 @@ const menus = [
       { t: 'Integração com corretoras', d: 'Importe notas SINACOR e conecte suas corretoras do Brasil e do Exterior.', href: '#' },
       { t: 'Relatórios', d: 'Acompanhe lucro, prejuízo e a evolução da sua carteira.', href: '#' },
       { t: 'Geração de DARFs', d: 'DARF pronto para pagar, com juros e multa calculados quando preciso.', href: '#' },
-      { t: 'AI Contador', badge: 'NOVO', d: 'Inteligência artificial que apura impostos e tira dúvidas 24/7.', href: '#contador' },
+      // Temporariamente fora do ar: { t: 'AI Contador', badge: 'NOVO', d: 'Inteligência artificial que apura impostos e tira dúvidas 24/7.', href: '#contador' },
     ],
   },
   {
@@ -68,7 +68,7 @@ const num = (i: number) => String(i + 1).padStart(2, '0')
           </div>
         </div>
       ))}
-      <a href="#contador" class="navbar__link" style="font-size: 16px;">Preços</a>
+      <a href="#produtos" class="navbar__link" style="font-size: 16px;">Preços</a>
     </nav>
 
     <div class="navbar__cta">
@@ -85,8 +85,8 @@ const num = (i: number) => String(i + 1).padStart(2, '0')
         </span>
       </button>
 
-      <a href="https://ir.sencon.com.br/login" class="navbar__login" id="navbar-login-btn" style="font-size: 16px;">Login</a>
-      <a href="https://ir.sencon.com.br/sign-up" class="btn btn--primary btn--sm" id="navbar-signup-btn" style="font-size: 16px;">Cadastre-se</a>
+      <a href="https://ir.sencon.com.br/login" target="_blank" rel="noopener" class="navbar__login" id="navbar-login-btn" style="font-size: 16px;">Login</a>
+      <a href="https://ir.sencon.com.br/sign-up" target="_blank" rel="noopener" class="btn btn--primary btn--sm" id="navbar-signup-btn" style="font-size: 16px;">Cadastre-se</a>
     </div>
   </div>
 </header>
