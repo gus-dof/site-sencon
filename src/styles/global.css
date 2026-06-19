@@ -2508,6 +2508,11 @@ body[data-density="comfy"]    { --pp-sec: 132px; }
    the whole page reads consistently dark (Linear /build is fully dark). */
 [data-theme="dark"] .pp-section { background: var(--ink-950); }
 
+/* LIGHT THEME — give the gray product sections the same soft blue wash the
+   home uses (#EEF2FB), so blocks alternate white ↔ wash with a visible rhythm
+   instead of the near-invisible --gray-50. White cards inside pop on the wash. */
+body[data-theme="light"] .pp-section.section--gray { background: var(--home-wash, #EEF2FB); }
+
 /* browser-frame window goes dark in dark theme (was white → bled through) */
 [data-theme="dark"] .scframe { background: var(--ink-900); border-color: var(--ink-line-strong); }
 [data-theme="dark"] .scframe .mockup__chrome { background: rgba(255,255,255,0.04); border-bottom-color: var(--ink-line); }
@@ -4055,3 +4060,185 @@ body[data-illo-anim="on"] .bz-dot { animation: bzpulse 1.8s ease-in-out infinite
   .gsf-dash { width: 86%; max-width: 380px; }
   .gsf-pill { white-space: normal; text-align: center; }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   SOLUTIONS PAGES — PERSONA HERO  (split: copy left, photo bleeds right)
+   Theme-aware so the sticky navbar blends in both light and dark.
+   ════════════════════════════════════════════════════════════════════ */
+.persona-hero {
+  position: relative;
+  background: var(--ink-950);
+  color: var(--ink-fg);
+  overflow: hidden;
+  isolation: isolate;
+}
+.persona-hero__grain {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(820px 520px at 14% 16%, rgba(21,94,239,0.26), transparent 60%),
+    radial-gradient(680px 600px at 96% 88%, rgba(21,94,239,0.12), transparent 60%);
+}
+.persona-hero__grain::after {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(ellipse 64% 80% at 18% 36%, #000 22%, transparent 78%);
+  mask-image: radial-gradient(ellipse 64% 80% at 18% 36%, #000 22%, transparent 78%);
+}
+.persona-hero__media { position: absolute; top: 0; right: 0; bottom: 0; width: 50%; z-index: 1; }
+.persona-hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; display: block; }
+/* scrim: fade the photo's left edge into the hero bg, soften top + bottom */
+.persona-hero__media::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--ink-950) 0%, rgba(5,11,26,0.45) 26%, transparent 56%),
+    linear-gradient(0deg, rgba(5,11,26,0.40) 0%, transparent 24%);
+}
+.persona-hero__inner {
+  position: relative; z-index: 2;
+  max-width: 540px;
+  min-height: 580px;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 92px 0 100px;
+}
+.persona-hero__title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(36px, 4.4vw, 60px); line-height: 1.05; letter-spacing: -0.03em;
+  color: #fff; margin: 20px 0 22px; text-wrap: balance;
+}
+.persona-hero__title .accent { color: #6B9DFF; }
+.persona-hero__sub {
+  font-size: 19px; line-height: 1.55; color: var(--ink-fg-muted);
+  margin: 0 0 32px; max-width: 48ch; text-wrap: pretty;
+}
+.persona-hero__cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.persona-hero__trust {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-top: 30px; font-size: 13.5px; color: var(--ink-fg-subtle);
+}
+.persona-hero__trust b { color: var(--ink-fg); font-weight: 600; }
+.persona-hero__sep { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: 0.4; }
+
+/* LIGHT THEME — blue-50 → white wash (matches navbar + pp-hero, no seam) */
+body[data-theme="light"] .persona-hero {
+  background: linear-gradient(180deg, var(--blue-50) 0%, #FFFFFF 78%);
+  color: var(--fg-default);
+}
+body[data-theme="light"] .persona-hero__grain {
+  background:
+    radial-gradient(820px 520px at 14% 16%, rgba(21,94,239,0.10), transparent 60%),
+    radial-gradient(680px 600px at 96% 88%, rgba(21,94,239,0.06), transparent 60%);
+}
+body[data-theme="light"] .persona-hero__grain::after {
+  background-image:
+    linear-gradient(to right, rgba(11,27,58,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11,27,58,0.05) 1px, transparent 1px);
+}
+body[data-theme="light"] .persona-hero__media::after {
+  background:
+    linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,0.55) 24%, transparent 54%),
+    linear-gradient(0deg, rgba(255,255,255,0.50) 0%, transparent 22%);
+}
+body[data-theme="light"] .persona-hero__title { color: var(--sencon-ink); }
+body[data-theme="light"] .persona-hero__title .accent { color: var(--sencon-blue); }
+body[data-theme="light"] .persona-hero__sub { color: var(--fg-muted); }
+body[data-theme="light"] .persona-hero__trust { color: var(--fg-subtle); }
+body[data-theme="light"] .persona-hero__trust b { color: var(--fg-default); }
+body[data-theme="light"] .persona-hero .btn--ghost-dark { background: #fff; color: var(--sencon-ink); border-color: var(--border-strong); }
+body[data-theme="light"] .persona-hero .btn--ghost-dark:hover { background: var(--gray-50); border-color: var(--gray-400); }
+
+/* entrance (skipped under reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .persona-hero__inner > * { animation: phRise 0.7s cubic-bezier(0.2,0.7,0.2,1) both; }
+  .persona-hero__eyebrow { animation-delay: 0.04s; }
+  .persona-hero__title { animation-delay: 0.12s; }
+  .persona-hero__sub { animation-delay: 0.2s; }
+  .persona-hero__cta { animation-delay: 0.28s; }
+  .persona-hero__trust { animation-delay: 0.36s; }
+  .persona-hero__media { animation: phReveal 1.1s cubic-bezier(0.2,0.7,0.2,1) both 0.1s; }
+}
+@keyframes phRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes phReveal { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: none; } }
+
+/* responsive — photo becomes a top banner, copy stacks below */
+@media (max-width: 1024px) {
+  .persona-hero__media { position: relative; width: 100%; height: 320px; }
+  .persona-hero__media img { object-position: 50% 24%; }
+  .persona-hero__media::after { background: linear-gradient(0deg, var(--ink-950) 3%, rgba(5,11,26,0.10) 42%, transparent 72%); }
+  body[data-theme="light"] .persona-hero__media::after { background: linear-gradient(0deg, #FFFFFF 3%, rgba(255,255,255,0.12) 42%, transparent 74%); }
+  .persona-hero__inner { max-width: none; min-height: 0; padding: 36px 0 52px; }
+}
+@media (max-width: 560px) { .persona-hero__media { height: 240px; } }
+
+/* ── ESTEIRA / passos (4-step horizontal stepper) ───────────────────── */
+.adv-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.adv-step {
+  position: relative;
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  background: #fff;
+  padding: 26px 24px 28px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.adv-step__top { display: flex; align-items: center; justify-content: space-between; }
+.adv-step__ico {
+  width: 42px; height: 42px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--blue-50); color: var(--sencon-blue);
+  border: 1px solid rgba(21,94,239,0.16);
+}
+.adv-step__ico svg { width: 21px; height: 21px; }
+.adv-step__n { font-family: var(--pp-mono); font-size: 13px; font-weight: 600; color: var(--fg-subtle); letter-spacing: 0.04em; }
+.adv-step h4 { font-family: var(--font-text); font-weight: 600; font-size: 17px; letter-spacing: -0.015em; color: var(--sencon-ink); margin: 4px 0 0; }
+.adv-step p { font-size: 14px; line-height: 1.55; color: var(--fg-muted); margin: 0; }
+.adv-step:not(:last-child)::after {
+  content: ''; position: absolute; top: 47px; right: -13px;
+  width: 9px; height: 9px;
+  border-top: 2px solid var(--border-strong); border-right: 2px solid var(--border-strong);
+  transform: translateY(-50%) rotate(45deg); z-index: 1;
+}
+[data-theme="dark"] .adv-step { background: var(--cf-surface); border-color: var(--ink-line-strong); }
+[data-theme="dark"] .adv-step__ico { background: rgba(107,157,255,0.16); color: #6B9DFF; border-color: rgba(107,157,255,0.3); }
+[data-theme="dark"] .adv-step__n { color: var(--ink-fg-subtle); }
+[data-theme="dark"] .adv-step h4 { color: #fff; }
+[data-theme="dark"] .adv-step p { color: var(--ink-fg-muted); }
+[data-theme="dark"] .adv-step:not(:last-child)::after { border-color: var(--ink-line-strong); }
+@media (max-width: 920px) {
+  .adv-flow { grid-template-columns: 1fr 1fr; }
+  .adv-step:nth-child(2)::after { display: none; }
+}
+@media (max-width: 560px) {
+  .adv-flow { grid-template-columns: 1fr; }
+  .adv-step::after { display: none !important; }
+}
+
+/* ── ESTEIRA CTA band ───────────────────────────────────────────────── */
+.adv-cta {
+  margin-top: 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 28px;
+  flex-wrap: wrap;
+  border: 1px solid var(--border-default);
+  border-radius: 18px;
+  background: var(--blue-50);
+  padding: 26px 30px;
+}
+.adv-cta__txt .t { font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; color: var(--sencon-ink); }
+.adv-cta__txt .d { font-size: 14.5px; line-height: 1.5; color: var(--fg-muted); margin-top: 4px; max-width: 66ch; }
+.adv-cta .btn { flex-shrink: 0; }
+[data-theme="dark"] .adv-cta { background: rgba(107,157,255,0.08); border-color: var(--ink-line-strong); }
+[data-theme="dark"] .adv-cta__txt .t { color: #fff; }
+[data-theme="dark"] .adv-cta__txt .d { color: var(--ink-fg-muted); }
+@media (max-width: 700px) { .adv-cta .btn { width: 100%; justify-content: center; } }
+
+/* ── Linkable persona cards (Outras soluções, rodapé) ───────────────── */
+.fx-persona__media img { width: 100%; height: 100%; min-height: 200px; object-fit: cover; object-position: center 26%; display: block; }
+.fx-persona--link { min-height: 0; text-decoration: none; transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.fx-persona--link .fx-persona__media { min-height: 200px; overflow: hidden; }
+.fx-persona--link:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.fx-persona__more { margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--sencon-blue); }
+.fx-persona__more svg { width: 16px; height: 16px; }
+.fx-persona--link:hover .fx-persona__more { gap: 10px; }
+[data-theme="dark"] .fx-persona--link:hover { border-color: rgba(255,255,255,0.22); box-shadow: 0 14px 30px -18px rgba(0,0,0,0.7); }
+[data-theme="dark"] .fx-persona__more { color: #6B9DFF; }
